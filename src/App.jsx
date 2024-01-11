@@ -1,8 +1,7 @@
 import Button from '@mui/material/Button'
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
 import ThreeDRotation from '@mui/icons-material/ThreeDRotation'
-// import TabIndicator from '@mui/material/Tabs/TabIndicator'
-
+import Typography from '@mui/material/Typography'
 
 function App() {
 
@@ -10,6 +9,9 @@ function App() {
   return (
     <>
       <div>akadkda</div>
+
+      <Typography variant='body2' color={'text.secondary'}>zsadkjsdakjads</Typography>
+
       <Button variant="text">Text</Button>
       <Button variant="contained">Contained</Button>
       <Button variant="outlined">Outlined</Button>
