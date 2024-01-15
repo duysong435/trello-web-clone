@@ -89,10 +89,19 @@ function BoardBar() {
               width: 34,
               height: 34,
               fontSize: 16,
-              border: 'none'
+              border: 'none',
+              color: 'white',
+              cursor: 'pointer',
+              '&:frist-of-type': { bgcolor: '#a4b0be' }
             }
           }}
         >
+          <Tooltip title='Avatar'>
+            <Avatar alt="Avatar" src="https://avatars.githubusercontent.com/u/93369803?v=4" />
+          </Tooltip>
+          <Tooltip title='Avatar'>
+            <Avatar alt="Avatar" src="https://avatars.githubusercontent.com/u/93369803?v=4" />
+          </Tooltip>
           <Tooltip title='Avatar'>
             <Avatar alt="Avatar" src="https://avatars.githubusercontent.com/u/93369803?v=4" />
           </Tooltip>
