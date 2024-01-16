@@ -37,7 +37,7 @@ function BoardBar() {
       justifyContent: 'space-between',
       gap: 2,
       overflowX: 'auto',
-      borderBottom: '1px solid #00bfa5',
+      // borderBottom: '1px solid #00bfa5',
       paddingX: 2,
       bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2')
     }}>
