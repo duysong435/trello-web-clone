@@ -10,7 +10,8 @@ import {
   useSensor,
   useSensors,
   DragOverlay,
-  defaultDropAnimationSideEffects
+  defaultDropAnimationSideEffects,
+  closestCorners
 } from '@dnd-kit/core'
 import {
   arrayMove
@@ -183,6 +184,9 @@ function BoardContent({ board }) {
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
+      // Thuật toán phát hiện va chạm ( nếu không có nó thì card với cover lớn hơn sẽ không kéo qua Column được vì lúc 
+      // này nó đăng bị conflict giữa card và column), chúng ta sẽ dùng closestCorners thay vì closestCenter
+      collisionDetection={closestCorners}
       sensors={sensors}>
       <Box sx={{
         // backgroundColor: 'primary.main',
