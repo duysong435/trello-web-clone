@@ -12,10 +12,10 @@ import {
   DragOverlay,
   defaultDropAnimationSideEffects,
   closestCorners,
-  rectIntersection,
+  // rectIntersection,
   pointerWithin,
   getFirstCollision,
-  closestCenter
+  // closestCenter
 } from '@dnd-kit/core'
 import {
   arrayMove
@@ -288,21 +288,22 @@ function BoardContent({ board }) {
 
     //Tìm các điểm giao nhau, va chạm - intersection với con trỏ
     const pointerIntersection = pointerWithin(args)
-
+    console.log('pointerIntersection', pointerIntersection)
+    if (!pointerIntersection?.length) return
     // Thuật toán phát hiện va chạm sẽ trả về một mảng các va chạm ở đây
-    const intersections = !!pointerIntersection?.length
-      ? pointerIntersection
-      : rectIntersection(args)
+    // const intersections = !!pointerIntersection?.length
+    //   ? pointerIntersection
+    //   : rectIntersection(args)
 
-    // Tìm overId đầu tiên trong đám intersections ở trên
-    let overId = getFirstCollision(intersections, 'id')
+    // Tìm overId đầu tiên trong đám pointerIntersection ở trên
+    let overId = getFirstCollision(pointerIntersection, 'id')
     console.log('overId', overId)
     if (overId) {
-      // Néu cái  over nó là column thì sễ tìm tới cardId gần nhất bên trong khu vực va chạm đó dựa vào thuật toán phát hiện va chạm closestCenter hoặc closestCorners đều được. Tuy nhiên ở đây dùng closestCenter mình dùng thấy mượt hơn
+      // Néu cái  over nó là column thì sễ tìm tới cardId gần nhất bên trong khu vực va chạm đó dựa vào thuật toán phát hiện va chạm closestCenter hoặc closestCorners đều được. Tuy nhiên ở đây dùng closestCorners mình dùng thấy mượt hơn
       const checkColumn = orderedColumns.find(column => column._id === overId)
       if (checkColumn) {
         // console.log('over ID before', overId)
-        overId = closestCenter({
+        overId = closestCorners({
           ...args,
           droppableContainers: args.droppableContainers.filter(container => {
             return (container.id !== overId) && (checkColumn?.cardOrderIds?.includes(container.id))
