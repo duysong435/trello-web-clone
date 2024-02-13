@@ -7,7 +7,7 @@ export const mockData = {
     type: 'public', // 'private'
     ownerIds: [], // Những users là Admin của board
     memberIds: [], // Những users là member bình thường của board
-    columnOrderIds: ['column-id-01', 'column-id-02', 'column-id-03'], // Thứ tự sắp xếp / vị trí của các Columns trong 1 boards
+    columnOrderIds: ['column-id-01', 'column-id-02', 'column-id-03', 'column-id-04'], // Thứ tự sắp xếp / vị trí của các Columns trong 1 boards
     columns: [
       {
         _id: 'column-id-01',
@@ -55,6 +55,25 @@ export const mockData = {
           { _id: 'card-id-12', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
           { _id: 'card-id-13', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [] }
         ]
+      },
+      {
+        _id: 'column-id-04',
+        boardId: 'board-id-01',
+        title: 'Empty column 04',
+        cardOrderIds: ['column-id-04-placeholder-card'],
+        cards: [
+          {
+            _id: 'column-id-04-placeholder-card', boardId: 'board-id-01', columnId: 'column-id-04',
+            FE_PlaceholaderCard: true
+          }
+        ]
+        // Cách fix bug logic thư viện DnD-kit khi column là rỗng:
+        // Phía FE sẽ tự tạo ra một cái card đặc biệt: Placeholder Card, không liên quan đến Back-end
+        // Card đặc biệt này sẽ được  ẩn  ở giao diện UI người dùng
+        // Cấu trúc Id của cái Id card này để Unique rất đơn giản, không cần phải lmaf random phức tạp:
+        // "columnId-placeholder-card" (mỗi column chỉ có thể tối đa một cái Placeholder Card)
+        // Quan trọng khi tạo: phải đầy đủ: (_id, boardId, columnId, FE_placeholdder)
+        // Kỹ hơn nữa về cachs tạo chuẩn ở bước nào thì sẽ học ở phần tích hợp API back-end vào dự án (bởi vì đây là file mock-data)
       }
     ]
   }

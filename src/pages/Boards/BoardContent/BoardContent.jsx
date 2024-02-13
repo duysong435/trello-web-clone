@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box'
 import ListColumns from './ListColumns/ListColumns'
 import { mapOrder } from '~/utils/sorts'
+import { generatePlaceholderCard } from '~/utils/formatters'
 
 import {
   DndContext,
@@ -21,7 +22,7 @@ import {
   arrayMove
 } from '@dnd-kit/sortable'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { cloneDeep } from 'lodash'
+import { cloneDeep, isEmpty } from 'lodash'
 
 import Column from './ListColumns/Column/Column'
 import Card from './ListColumns/Column/ListCards/Card/Card'
@@ -66,8 +67,8 @@ function BoardContent({ board }) {
 
   // Tìm một cái column theo cardId
   const findColumnByCardId = (cardId) => {
-    // Đoạn này cần lưu ý, nên dùng c.cards thay vì dùng c.cardOrderIds bởi vì ở bước handleDragOver chúng sẽ 
-    // làm dữ liệu cho cards hoàn chỉnh trước rồi mới tạo ra cardOrderIds mới. 
+    // Đoạn này cần lưu ý, nên dùng c.cards thay vì dùng c.cardOrderIds bởi vì ở bước handleDragOver chúng sẽ
+    // làm dữ liệu cho cards hoàn chỉnh trước rồi mới tạo ra cardOrderIds mới.
     return orderedColumns.find(column => column?.cards?.map(card => card._id)?.includes(cardId))
   }
 
@@ -104,6 +105,11 @@ function BoardContent({ board }) {
         // Xoá card ở cái column active (cũng có thể hiểu là column cũ, cái lúc mà kéo card ra khỏi nó để sang column khác)
         nextActiveColumn.cards = nextActiveColumn.cards.filter(card => card._id !== activeDraggingCardId)
 
+        // Thêm placeholder Card nếu column rỗng: Bị kéo hết Card  đi không còn cái nào nữa
+        if (isEmpty(nextActiveColumn.cards)) {
+          nextActiveColumn.cards = [generatePlaceholderCard(nextActiveColumn)]
+        }
+
         // Cật nhật lại mảng cardOrderIds cho chuẩn dữ liệu
         nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map(card => card._id)
       }
@@ -119,6 +125,9 @@ function BoardContent({ board }) {
         }
         // Tiếp theo là thêm cái card đang kéo vào overColumn theo vị trí index mới
         nextOverColumn.cards = nextOverColumn.cards.toSpliced(newCardIndex, 0, rebuild_activeDraggingCardData)
+
+        // Xoá cái placeholder Card đi nếu nó đang tồn tại
+        nextOverColumn.cards = nextOverColumn.cards.filter(card => !card.FE_PlaceholaderCard)
 
         // Cật nhật lại mảng cardOrderIds cho chuẩn dữ liệu
         nextOverColumn.cardOrderIds = nextOverColumn.cards.map(card => card._id)
@@ -288,7 +297,7 @@ function BoardContent({ board }) {
 
     //Tìm các điểm giao nhau, va chạm - intersection với con trỏ
     const pointerIntersection = pointerWithin(args)
-    console.log('pointerIntersection', pointerIntersection)
+    // console.log('pointerIntersection', pointerIntersection)
     if (!pointerIntersection?.length) return
     // Thuật toán phát hiện va chạm sẽ trả về một mảng các va chạm ở đây
     // const intersections = !!pointerIntersection?.length
@@ -297,7 +306,7 @@ function BoardContent({ board }) {
 
     // Tìm overId đầu tiên trong đám pointerIntersection ở trên
     let overId = getFirstCollision(pointerIntersection, 'id')
-    console.log('overId', overId)
+    // console.log('overId', overId)
     if (overId) {
       // Néu cái  over nó là column thì sễ tìm tới cardId gần nhất bên trong khu vực va chạm đó dựa vào thuật toán phát hiện va chạm closestCenter hoặc closestCorners đều được. Tuy nhiên ở đây dùng closestCorners mình dùng thấy mượt hơn
       const checkColumn = orderedColumns.find(column => column._id === overId)
