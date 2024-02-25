@@ -232,7 +232,7 @@ function BoardContent({ board }) {
 
         // Dùng araymove vì kéo card trong một cái column thu=ì tương tự với logiv kéo column trong một cái board content
         const dndOrderedCards = arrayMove(oldColumnWhenDraggingCard?.cards, oldCardIndex, newIndex)
-        console.log('safssaffasfssfasfsafdndOrderedCards', dndOrderedCards)
+        // console.log('safssaffasfssfasfsafdndOrderedCards', dndOrderedCards)
 
         setOrderedColumn(prevColumns => {
           // Clone mảng OrderedColumnsState cũ ra một cái mới để xử lý data rồi return  - cập nhật lại OrderedColumnState mới
@@ -244,7 +244,7 @@ function BoardContent({ board }) {
           // cập nhật lại 2 giá trị mới là card  và cardOrderIds trong cái targetColumn
           targetColumn.cards = dndOrderedCards
           targetColumn.cardOrderIds = dndOrderedCards.map(card => card._id)
-          console.log(targetColumn)
+          // console.log(targetColumn)
 
           // trả về giá trị state mưới (chuẩn vị trí)
           return nextColumns
@@ -254,7 +254,7 @@ function BoardContent({ board }) {
 
     // Xử lý kéo thả columns trong boardContent
     if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPES.COLUMN) {
-      console.log('Hành động kéo thả tạm thời của Column')
+      // console.log('Hành động kéo thả tạm thời của Column')
 
       if (active.id !== over.id) {
         // lấy vị trí cữ (từ thằng active)
