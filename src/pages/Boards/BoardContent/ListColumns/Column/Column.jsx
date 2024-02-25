@@ -15,6 +15,7 @@ import Tooltip from '@mui/material/Tooltip'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import TextField from '@mui/material/TextField'
 import CloseIcon from '@mui/icons-material/Close'
+import { toast } from 'react-toastify'
 
 
 import { useState } from 'react'
@@ -61,7 +62,9 @@ function Column({ column }) {
 
   const addNewCard = () => {
     if (!newCardTitle) {
-      console.error('Please enter cloumn title!')
+      toast.error('Please enter card title!', {
+        position: 'bottom-right'
+      })
       return
     }
 
