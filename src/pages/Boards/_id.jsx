@@ -5,9 +5,11 @@ import Container from '@mui/material/Container'
 import AppBar from '~/components/AppBar/AppBoard'
 import BoardBar from './BoardsBar/BoardBar'
 import BoardContent from './BoardContent/BoardContent'
-import { mockData } from '~/apis/mock-data'
+// import { mockData } from '~/apis/mock-data'
 import { useEffect, useState } from 'react'
-import { fetchBoardDetailsAPI } from '~/apis'
+import { createNewCardAPI, createNewColumnAPI, fetchBoardDetailsAPI } from '~/apis'
+import { generatePlaceholderCard } from '~/utils/formatters'
+import { isEmpty } from 'lodash'
 
 
 function Board() {
@@ -16,16 +18,58 @@ function Board() {
   useEffect(() => {
     const boardid = '65d95828a156910368638dff'
     fetchBoardDetailsAPI(boardid).then((board) => {
+      board.columns.forEach(column => {
+        if (isEmpty(column.cards)) {
+          column.cards = [generatePlaceholderCard(column)]
+          column.cardOrderIds = [generatePlaceholderCard(column)._id]
+        }
+      })
+      // console.log(board)
       setBoard(board)
       // console.log(board)
     })
   }, [])
-  // console.log(board)
+  // Funcition này có nhiêmh vụ goi API tạo mới column và làm lại dữ liệu State board
+  const createNewColumn = async (newColumnData) => {
+    const createdColumn = await createNewColumnAPI({
+      ...newColumnData,
+      boardId: board._id
+    })
+    // console.log('createNewColumn', createNewColumn)
+
+    // Khi tạo column mới thì sẽ chưa có card, cần xử lý vấn đề kéo thả và một colimn rông
+    createdColumn.cards = [generatePlaceholderCard(createdColumn)]
+    createdColumn.cardOrderIds = [generatePlaceholderCard(createdColumn)._id]
+    // Cập nhật lại state board
+    const newBoard = { ...board }
+    newBoard.columns.push(createdColumn)
+    newBoard.columnOrderIds.push(createdColumn._id)
+    setBoard(newBoard)
+  }
+  const createNewCard = async (newCardData) => {
+    const createdCard = await createNewCardAPI({
+      ...newCardData,
+      boardId: board._id
+    })
+    // console.log('createNewColumn', createNewColumn)
+
+    // Cập nhật lại state board
+    const newBoard = { ...board }
+    const columnToUpdate = newBoard.columns.find(column => column._id === createdCard.columnId)
+    if (columnToUpdate) {
+      columnToUpdate.cards.push(createdCard)
+      columnToUpdate.cardOrderIds.push(createdCard._id)
+    }
+    setBoard(newBoard)
+  }
   return (
     <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
       <AppBar />
-      <BoardBar board={mockData.board} />
-      <BoardContent board={mockData.board} />
+      <BoardBar board={board} />
+      <BoardContent board={board}
+        createNewColumn={createNewColumn}
+        createNewCard={createNewCard}
+      />
     </Container>
   )
 }

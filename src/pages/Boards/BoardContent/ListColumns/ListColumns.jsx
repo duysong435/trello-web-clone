@@ -8,16 +8,22 @@ import { toast } from 'react-toastify'
 import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable'
 import { useState } from 'react'
 
-function ListColumns({ columns }) {
+function ListColumns({ columns, createNewColumn, createNewCard }) {
   const [openNewColumnForm, setopenNewColumnForm] = useState(false)
   const toggleOpenNewColumnForm = () => setopenNewColumnForm(!openNewColumnForm)
   const [newColumnTitle, setNewColumnTitle] = useState('')
 
-  const addNewColumn = () => {
+  const addNewColumn = async () => {
     if (!newColumnTitle) {
       toast.error('Please enter cloumn title!')
       return
     }
+    // Tạo dữ liệu Colun để gọi API
+    const newColumnData = {
+      title: newColumnTitle
+    }
+
+    await createNewColumn(newColumnData)
 
     toggleOpenNewColumnForm()
     setNewColumnTitle('')
@@ -35,7 +41,9 @@ function ListColumns({ columns }) {
       }}>
         {/* Box column */}
         {
-          columns?.map((column) => <Column key={column?._id} column={column} />)
+          columns?.map((column) => <Column key={column?._id} column={column}
+            createNewCard={createNewCard}
+          />)
         }
         {/* Add new clomun */}
         {
