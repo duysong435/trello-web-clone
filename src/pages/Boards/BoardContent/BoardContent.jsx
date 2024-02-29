@@ -36,7 +36,8 @@ function BoardContent({
   board, createNewColumn, createNewCard,
   moveColumns,
   moveCardInTheSameColumn,
-  moveCardToDifferentColumn
+  moveCardToDifferentColumn,
+  deleteColumnDetails
 }) {
   const pointerSensor = useSensor(PointerSensor, {
     activationConstraint: {
@@ -376,6 +377,7 @@ function BoardContent({
         <ListColumns columns={orderedColumns}
           createNewColumn={createNewColumn}
           createNewCard={createNewCard}
+          deleteColumnDetails={deleteColumnDetails}
         />
         <DragOverlay dropAnimation={customDropAmimation}>
           {!activeDragItemType && null}
