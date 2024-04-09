@@ -8,6 +8,10 @@ export default defineConfig({
     react(),
     svgr()
   ],
+  // envPrefix: {
+  //   API_URL: process.env.REACT_APP_API_URL,
+  //   SECRET_KEY: process.env.REACT_APP_SECRET_KEY
+  // },
   //  base: "./",
   resolve: {
     alias: [
