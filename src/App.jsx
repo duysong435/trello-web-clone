@@ -19,7 +19,7 @@ function App() {
           <Route path={path.SignUp} element={<SignUp />} />
         </Route>
         <Route element={<PrivateRoutes />}>
-          <Route path={path.Board} element={<Board />} />
+          <Route path={path.Board + '/:id'} element={<Board />} />
           <Route path={path.Home} element={<HomePage />} />
         </Route>
         <Route path="*" element={<Navigate to="/404" />} />
