@@ -14,14 +14,17 @@ import { createNewCardAPI, createNewColumnAPI, deleteColumnDetailsAPI, fetchBoar
 import { generatePlaceholderCard } from '~/utils/formatters'
 import { isEmpty } from 'lodash'
 import { mapOrder } from '~/utils/sorts'
+import { useParams } from 'react-router-dom'
 
 
 function Board() {
   const [board, setBoard] = useState(null)
+  const { id } = useParams()
 
   useEffect(() => {
-    const boardid = '65d95828a156910368638dff'
-    fetchBoardDetailsAPI(boardid).then((board) => {
+    // const boardid = '65d95828a156910368638dff'
+    fetchBoardDetailsAPI(id).then((board) => {
+      console.log('🚀 ~ fetchBoardDetailsAPI ~ board:', board)
       // Sắp xép thứ tự các column luôn trước khi đưa dữ liệu sang các component con
       board.columns = mapOrder(board?.columns, board?.columnOrderIds, '_id')
 

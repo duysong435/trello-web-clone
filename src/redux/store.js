@@ -17,10 +17,33 @@ import authSlice from './authSlice'
 const persistConfig = {
   key: 'root',
   version: 1,
-  storage
+  storage,
+  blacklist: ['trello'],
 }
-const rootReducer = combineReducers({ auth: authSlice.reducer, trello: trelloSlice.reducer })
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+const authPersistConfig = {
+  key: 'auth',
+  storage: storage,
+  // blacklist: ['trello'], // Không lưu trạng thái của trelloSlice
+};
+const trelloPersistConfig = {
+  key: 'trello',
+  storage: storage,
+  // blacklist: ['boards'] // Không lưu trạng thái của trelloSlice
+};
+
+const rootReducer = combineReducers({
+  auth: persistReducer(authPersistConfig, authSlice.reducer),
+  trello: persistReducer(trelloPersistConfig, trelloSlice.reducer)
+})
+// const rootReducer = combineReducers({
+//   auth: authSlice.reducer,
+//   trello: trelloSlice.reducer
+// })
+
+// const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = rootReducer;
+
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>

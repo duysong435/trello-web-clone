@@ -9,9 +9,13 @@ const instance = axios.create({
 instance.interceptors.request.use(function (config) {
   // Do something before request is sent
   // gắn token vào header
-  let token = window.localStorage.getItem('persist:auth') && JSON.parse(window.localStorage.getItem('persist:auth'))?.token?.slice(1, -1)
+  let accessToken = window.localStorage.getItem('persist:auth') && JSON.parse(window.localStorage.getItem('persist:auth'))?.accessToken.slice(1, -1)
+  let refreshToken = window.localStorage.getItem('persist:auth') && JSON.parse(window.localStorage.getItem('persist:auth'))?.refreshToken.slice(1, -1)
+  let userId = window.localStorage.getItem('persist:auth') && JSON.parse(window.localStorage.getItem('persist:auth'))?.userId.slice(1, -1)
   config.headers = {
-    authorization: token ? `Bearer ${token}` : null
+    authorization: accessToken ? accessToken : null,
+    'x-client-id': userId ? userId : null,
+    'x-rtoken-id': refreshToken ? refreshToken : null
   }
   return config
 }, function (error) {

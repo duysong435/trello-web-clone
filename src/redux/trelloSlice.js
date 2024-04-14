@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from '~/axios'
+import { toast } from 'react-toastify'
 
 const trelloSlice = createSlice({
   name: 'trello',
-  initialState: { status: 'idle', todos: [] },
+  initialState: { status: 'idle', boards: [] },
   reducers: {
     addColumn: (state, action) => {
       state.push(action.payload)
@@ -10,28 +12,42 @@ const trelloSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTodos.pending, (state, action) => {
+      .addCase(getAllForUser.pending, (state, action) => {
         state.status = 'loading'
+      })
+      .addCase(getAllForUser.fulfilled, (state, action) => {
+        state.status = 'idle'
+        state.boards = action.payload.metadata
+      })
+
+
+      .addCase(addNewBoard.pending, (state, action) => {
+        state.status = 'loading'
+      })
+      .addCase(addNewBoard.fulfilled, (state, action) => {
+        state.status = 'idle'
+        state.boards.push(action.payload)
+        toast.success('create success!')
+      })
+      .addCase(addNewBoard.rejected, (state, action) => {
+        state.status = 'idle'
+        toast.error('create failed!')
       })
   }
 })
 
-export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
-  const res = await fetch('/api/todos')
-  const data = await res.json()
-  return data.todos
+export const getAllForUser = createAsyncThunk('trello/getAll', async () => {
+  const res = await axios.get('/boards/get-all-board')
+  console.log('🚀 ~ getAllForUser ~ res:', res)
+  return res
 })
 
-export const addNewTodo = createAsyncThunk(
-  'todos/addNewTodo',
-  async (newTodo) => {
-    const res = await fetch('/api/todos', {
-      method: 'POST',
-      body: JSON.stringify(newTodo)
-    })
-    const data = await res.json()
-    console.log({ data })
-    return data.todos
+export const addNewBoard = createAsyncThunk(
+  'trello/addNewBoard',
+  async (newBoard) => {
+    const res = await axios.post('/boards', newBoard)
+    // console.log('🚀 ~ res:', res)
+    return res
   }
 )
 

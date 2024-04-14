@@ -23,14 +23,23 @@ import { useConfirm } from 'material-ui-confirm'
 import AddCardIcon from '@mui/icons-material/AddCard'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import AppBar from '~/components/AppBar/AppBoard'
-import DashboardHome from './Dashboard/Dashboard'
+import DashboardSideBar from './DashboardSideBar/DashboardSideBar'
+import DashboardAll from './DashboardAll/DashboardAll'
 
 
-export default function HomePage() {
+export default function DashboardHome() {
   return (
-    <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
-      <AppBar />
-      <DashboardHome />
-    </Container>
+    <Box sx={{
+      display: 'grid',
+      gridTemplateColumns: '4fr 8fr',
+      // height: '88%'
+      gap: 5,
+      marginTop: 6
+    }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <DashboardSideBar />
+      </Box>
+      <DashboardAll />
+    </Box>
   )
 }

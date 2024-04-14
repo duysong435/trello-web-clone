@@ -4,7 +4,13 @@ import { toast } from 'react-toastify'
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: { status: 'idle', data: null },
+  initialState: {
+    status: 'idle',
+    data: null,
+    accessToken: null,
+    refreshToken: null,
+    userId: null
+  },
   reducers: {
   },
   extraReducers: (builder) => {
@@ -14,7 +20,10 @@ const authSlice = createSlice({
       })
       .addCase(authSignIn.fulfilled, (state, action) => {
         state.status = 'idle'
-        state.data = action.payload
+        state.data = action.payload.user
+        state.accessToken = action.payload.tokens.accessToken
+        state.refreshToken = action.payload.tokens.refreshToken
+        state.userId = action.payload.user._id
         toast.success('Login success!')
       })
       .addCase(authSignIn.rejected, (state, action) => {
@@ -27,7 +36,10 @@ const authSlice = createSlice({
       })
       .addCase(authSignUp.fulfilled, (state, action) => {
         state.status = 'idle'
-        state.data = action.payload
+        state.data = JSON.stringify(action.payload)
+        state.accessToken = action.payload.tokens.accessToken
+        state.refreshToken = action.payload.tokens.refreshToken
+        state.userId = action.payload.user._id
         toast.success('Register success!')
       })
       .addCase(authSignUp.rejected, (state, action) => {
