@@ -62,6 +62,7 @@ export default function SignIn() {
         <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
+            value={'test@gmail.com'}
             required
             fullWidth
             id="email"
@@ -85,6 +86,7 @@ export default function SignIn() {
           )}
           <TextField
             margin="normal"
+            value={'123456'}
             required
             fullWidth
             name="password"

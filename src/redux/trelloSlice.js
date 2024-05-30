@@ -4,10 +4,10 @@ import { toast } from 'react-toastify'
 
 const trelloSlice = createSlice({
   name: 'trello',
-  initialState: { status: 'idle', boards: [] },
+  initialState: { status: 'idle', boards: [], disableDrag: false },
   reducers: {
-    addColumn: (state, action) => {
-      state.push(action.payload)
+    disableDragApp: (state, action) => {
+      state.disableDrag = !state.disableDrag
     }
   },
   extraReducers: (builder) => {
@@ -18,6 +18,10 @@ const trelloSlice = createSlice({
       .addCase(getAllForUser.fulfilled, (state, action) => {
         state.status = 'idle'
         state.boards = action.payload.metadata
+      })
+      .addCase(getAllForUser.rejected, (state, action) => {
+        state.status = 'idle'
+        toast.error('Failed!')
       })
 
 
@@ -38,7 +42,7 @@ const trelloSlice = createSlice({
 
 export const getAllForUser = createAsyncThunk('trello/getAll', async () => {
   const res = await axios.get('/boards/get-all-board')
-  console.log('🚀 ~ getAllForUser ~ res:', res)
+  // console.log('🚀 ~ getAllForUser ~ res:', res)
   return res
 })
 
@@ -51,6 +55,6 @@ export const addNewBoard = createAsyncThunk(
   }
 )
 
-
+export const { disableDragApp } = trelloSlice.actions
 export default trelloSlice
 
