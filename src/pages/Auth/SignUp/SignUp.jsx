@@ -1,49 +1,49 @@
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { path } from '~/utils/constants';
-import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { authSignIn, authSignUp } from '~/redux/authSlice';
-import LeftBG from '~/assets/left-bg.svg';
-import RightBG from '~/assets/right-bg.svg';
-import { ReactComponent as TrelloIcon } from '~/assets/trello.svg';
-import SvgIcon from '@mui/material/SvgIcon';
-import { styled } from '@mui/material/styles';
-import { ReactComponent as Google } from '~/assets/Google.svg';
-import LogoAlassion from '~/assets/logo-alassian.svg';
-import { useEffect } from 'react';
-import axios from 'axios';
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Link from '@mui/material/Link'
+import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
+import { path } from '~/utils/constants'
+import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { authSignIn, authSignUp } from '~/redux/authSlice'
+import LeftBG from '~/assets/left-bg.svg'
+import RightBG from '~/assets/right-bg.svg'
+import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
+import SvgIcon from '@mui/material/SvgIcon'
+import { styled } from '@mui/material/styles'
+import { ReactComponent as Google } from '~/assets/Google.svg'
+import LogoAlassion from '~/assets/logo-alassian.svg'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 const GoogleButton = styled(Button)({
   border: '1px solid',
   lineHeight: 1.5,
-  borderColor: '#bcc2ccf7',
-});
+  borderColor: '#bcc2ccf7'
+})
 
 export default function SignUp() {
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
-  } = useForm();
+    formState: { errors }
+  } = useForm()
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const onSubmit = (data) => {
-    data.name = data.firstName + ' ' + data.lastName;
-    delete data.firstName;
-    delete data.lastName;
-    console.log('🚀 ~ onSubmit ~ data:', data);
-    dispatch(authSignUp(data));
-  };
+  const onSubmit = data => {
+    data.name = data.firstName + ' ' + data.lastName
+    delete data.firstName
+    delete data.lastName
+    console.log('🚀 ~ onSubmit ~ data:', data)
+    dispatch(authSignUp(data))
+  }
 
   return (
     <Box
@@ -52,7 +52,7 @@ export default function SignUp() {
         bgcolor: '#fafbfc',
         height: '100vh',
         position: 'relative',
-        top: '0',
+        top: '0'
       }}
     >
       <Box sx={{ display: { xs: 'none', md: 'flex', gap: 1 } }}>
@@ -63,7 +63,7 @@ export default function SignUp() {
             position: 'absolute',
             bottom: '0',
             right: '0',
-            width: '27%',
+            width: '27%'
           }}
         />
       </Box>
@@ -75,7 +75,7 @@ export default function SignUp() {
             position: 'absolute',
             bottom: '0',
             left: '0',
-            width: '27%',
+            width: '27%'
           }}
         />
       </Box>
@@ -86,21 +86,21 @@ export default function SignUp() {
           flexDirection: 'column',
           alignItems: 'center',
           width: '400px',
-          margin: 'auto',
+          margin: 'auto'
         }}
       >
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
           noValidate
-          sx={(theme) => ({
+          sx={theme => ({
             //  bgcolor: 'black',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             mt: 5,
             p: 6,
-            boxShadow: theme.shadows.md,
+            boxShadow: theme.shadows.md
           })}
         >
           <Box sx={{ display: 'flex' }}>
@@ -131,7 +131,7 @@ export default function SignUp() {
                 size="small"
                 {...register('firstName', {
                   required: true,
-                  maxLength: 100,
+                  maxLength: 100
                 })}
               />
               {errors?.firstName?.type === 'required' && (
@@ -157,7 +157,7 @@ export default function SignUp() {
                 size="small"
                 {...register('lastName', {
                   required: true,
-                  maxLength: 100,
+                  maxLength: 100
                 })}
               />
               {errors?.lastName?.type === 'required' && (
@@ -185,7 +185,7 @@ export default function SignUp() {
                   required: true,
                   maxLength: 100,
                   // eslint-disable-next-line no-useless-escape
-                  pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                  pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
                 })}
               />
               {errors?.email?.type === 'required' && (
@@ -216,7 +216,7 @@ export default function SignUp() {
                 {...register('password', {
                   required: true,
                   maxLength: 25,
-                  minLength: 6,
+                  minLength: 6
                   // pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/
                 })}
               />
@@ -282,7 +282,7 @@ export default function SignUp() {
               alignItems: 'center',
               flexDirection: 'column',
               borderTop: '1px solid #c1c7d0',
-              width: '100%',
+              width: '100%'
             }}
           >
             <img
@@ -338,5 +338,5 @@ export default function SignUp() {
       </Box>
       {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
     </Box>
-  );
+  )
 }

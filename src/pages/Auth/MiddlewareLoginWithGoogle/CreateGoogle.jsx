@@ -1,42 +1,42 @@
 // Authentication  - SignIn register
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { signInWithGoogle } from '~/redux/authSlice';
-import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import LeftBG from '~/assets/left-bg.svg';
-import RightBG from '~/assets/right-bg.svg';
-import { ReactComponent as TrelloIcon } from '~/assets/trello.svg';
-import SvgIcon from '@mui/material/SvgIcon';
-import LogoAlassion from '~/assets/logo-alassian.svg';
-import { Grid } from '@mui/material';
-import { path } from '~/utils/constants';
-import { testLoginGG } from '~/apis';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { signInWithGoogle } from '~/redux/authSlice'
+import Button from '@mui/material/Button'
+import Link from '@mui/material/Link'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import LeftBG from '~/assets/left-bg.svg'
+import RightBG from '~/assets/right-bg.svg'
+import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
+import SvgIcon from '@mui/material/SvgIcon'
+import LogoAlassion from '~/assets/logo-alassian.svg'
+import { Grid } from '@mui/material'
+import { path } from '~/utils/constants'
+import { testLoginGG } from '~/apis'
 function CreateUserGoogle() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null)
   useEffect(() => {
     if (!user) {
       const fetchData = async () => {
         try {
-          const res = await testLoginGG();
-          setUser(res.metadata.user);
+          const res = await testLoginGG()
+          setUser(res.metadata.user)
         } catch (error) {
-          console.error('Error fetching data:', error);
+          console.error('Error fetching data:', error)
         }
-      };
-      fetchData();
+      }
+      fetchData()
     }
-  });
+  })
   // console.log(user);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const handleDispatch = () => {
-    dispatch(signInWithGoogle());
-  };
+    dispatch(signInWithGoogle())
+  }
 
   // log out function to log the user out of google and set the profile array to null
   // const logOut = () => {
@@ -51,7 +51,7 @@ function CreateUserGoogle() {
         bgcolor: '#fafbfc',
         height: '100vh',
         position: 'relative',
-        top: '0',
+        top: '0'
       }}
     >
       <Box sx={{ display: { xs: 'none', md: 'flex', gap: 1 } }}>
@@ -62,7 +62,7 @@ function CreateUserGoogle() {
             position: 'absolute',
             bottom: '0',
             right: '0',
-            width: '27%',
+            width: '27%'
           }}
         />
       </Box>
@@ -74,7 +74,7 @@ function CreateUserGoogle() {
             position: 'absolute',
             bottom: '0',
             left: '0',
-            width: '27%',
+            width: '27%'
           }}
         />
       </Box>
@@ -85,20 +85,20 @@ function CreateUserGoogle() {
           flexDirection: 'column',
           alignItems: 'center',
           width: '400px',
-          margin: 'auto',
+          margin: 'auto'
         }}
       >
         <Box
           component=""
           noValidate
-          sx={(theme) => ({
+          sx={theme => ({
             //  bgcolor: 'black',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             mt: 10,
             p: 6,
-            boxShadow: theme.shadows.md,
+            boxShadow: theme.shadows.md
           })}
         >
           <Box sx={{ display: 'flex' }}>
@@ -182,7 +182,7 @@ function CreateUserGoogle() {
               alignItems: 'center',
               flexDirection: 'column',
               borderTop: '1px solid #c1c7d0',
-              width: '100%',
+              width: '100%'
             }}
           >
             <img
@@ -238,7 +238,7 @@ function CreateUserGoogle() {
       </Box>
       {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
     </Box>
-  );
+  )
 }
 
-export default CreateUserGoogle;
+export default CreateUserGoogle

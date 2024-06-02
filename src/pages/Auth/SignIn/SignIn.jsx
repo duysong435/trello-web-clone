@@ -1,45 +1,45 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { path } from '~/utils/constants';
-import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { authSignIn } from '~/redux/authSlice';
-import { ReactComponent as TrelloIcon } from '~/assets/trello.svg';
-import SvgIcon from '@mui/material/SvgIcon';
-import { styled } from '@mui/material/styles';
-import { ReactComponent as Google } from '~/assets/Google.svg';
-import LeftBG from '~/assets/left-bg.svg';
-import RightBG from '~/assets/right-bg.svg';
+import * as React from 'react'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Link from '@mui/material/Link'
+import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import { path } from '~/utils/constants'
+import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { authSignIn } from '~/redux/authSlice'
+import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
+import SvgIcon from '@mui/material/SvgIcon'
+import { styled } from '@mui/material/styles'
+import { ReactComponent as Google } from '~/assets/google.svg'
+import LeftBG from '~/assets/left-bg.svg'
+import RightBG from '~/assets/right-bg.svg'
 // import { Input } from '@mui/material';
-import LogoAlassion from '~/assets/logo-alassian.svg';
+import LogoAlassion from '~/assets/logo-alassian.svg'
 const GoogleButton = styled(Button)({
   border: '1px solid',
   lineHeight: 1.5,
-  borderColor: '#bcc2ccf7',
-});
+  borderColor: '#bcc2ccf7'
+})
 export default function SignIn() {
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
-  } = useForm();
+    formState: { errors }
+  } = useForm()
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleSignInWithGoogle = () => {
-    window.open('http://localhost:8080/v1/auth/google', '_self');
-  };
-  const onSubmit = (data) => {
-    console.log('🚀 ~ onSubmit ~ data:', data);
-    dispatch(authSignIn(data));
-  };
+    window.open('http://localhost:8080/v1/auth/google', '_self')
+  }
+  const onSubmit = data => {
+    console.log('🚀 ~ onSubmit ~ data:', data)
+    dispatch(authSignIn(data))
+  }
 
   return (
     <Box
@@ -48,7 +48,7 @@ export default function SignIn() {
         bgcolor: '#fafbfc',
         height: '100vh',
         position: 'relative',
-        top: '0',
+        top: '0'
       }}
     >
       <Box sx={{ display: { xs: 'none', md: 'flex', gap: 1 } }}>
@@ -59,7 +59,7 @@ export default function SignIn() {
             position: 'absolute',
             bottom: '0',
             right: '0',
-            width: '27%',
+            width: '27%'
           }}
         />
       </Box>
@@ -71,7 +71,7 @@ export default function SignIn() {
             position: 'absolute',
             bottom: '0',
             left: '0',
-            width: '27%',
+            width: '27%'
           }}
         />
       </Box>
@@ -82,21 +82,21 @@ export default function SignIn() {
           flexDirection: 'column',
           alignItems: 'center',
           width: '400px',
-          margin: 'auto',
+          margin: 'auto'
         }}
       >
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
           noValidate
-          sx={(theme) => ({
+          sx={theme => ({
             //  bgcolor: 'black',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             mt: 5,
             p: 6,
-            boxShadow: theme.shadows.md,
+            boxShadow: theme.shadows.md
           })}
         >
           <Box sx={{ display: 'flex' }}>
@@ -127,7 +127,7 @@ export default function SignIn() {
               required: true,
               maxLength: 100,
               // eslint-disable-next-line no-useless-escape
-              pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+              pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
             })}
           />
           {errors?.email?.type === 'required' && (
@@ -155,7 +155,7 @@ export default function SignIn() {
             {...register('password', {
               required: true,
               maxLength: 25,
-              minLength: 6,
+              minLength: 6
               // pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/
             })}
           />
@@ -220,7 +220,7 @@ export default function SignIn() {
               alignItems: 'center',
               flexDirection: 'column',
               borderTop: '1px solid #c1c7d0',
-              width: '100%',
+              width: '100%'
             }}
           >
             <img
@@ -276,5 +276,5 @@ export default function SignIn() {
       </Box>
       {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
     </Box>
-  );
+  )
 }

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { signInWithGoogle } from '~/redux/authSlice';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { signInWithGoogle } from '~/redux/authSlice'
 const PostAuth = () => {
-  const [isNewUser, setIsNewUser] = useState(null);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const [isNewUser, setIsNewUser] = useState(null)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const checkUserStatus = async () => {
@@ -14,31 +14,31 @@ const PostAuth = () => {
         const response = await axios.get(
           'http://localhost:8080/v1/auth/checkNewUser',
           {
-            withCredentials: true,
+            withCredentials: true
           }
-        );
+        )
         // console.log(response);
 
-        setIsNewUser(response.data);
+        setIsNewUser(response.data)
       } catch (error) {
-        console.error('Error checking user status', error);
+        console.error('Error checking user status', error)
       }
-    };
-    checkUserStatus();
-  }, []);
+    }
+    checkUserStatus()
+  }, [])
 
   useEffect(() => {
     // console.log(isNewUser);
     if (isNewUser === true) {
-      navigate('/auth'); // Chuyển hướng người dùng mới
+      navigate('/auth') // Chuyển hướng người dùng mới
     } else if (isNewUser === false) {
-      dispatch(signInWithGoogle());
+      dispatch(signInWithGoogle())
 
       // navigate('/'); // Chuyển hướng người dùng đã tồn tại
     }
-  }, [isNewUser, navigate]);
+  }, [isNewUser, navigate])
 
-  return null;
-};
+  return null
+}
 
-export default PostAuth;
+export default PostAuth
