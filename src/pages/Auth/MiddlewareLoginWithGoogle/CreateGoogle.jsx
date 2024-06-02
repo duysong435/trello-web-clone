@@ -1,45 +1,48 @@
-import * as React from 'react';
+// Authentication  - SignIn register
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { signInWithGoogle } from '~/redux/authSlice';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { path } from '~/utils/constants';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { authSignIn } from '~/redux/authSlice';
-import { ReactComponent as TrelloIcon } from '~/assets/trello.svg';
-import SvgIcon from '@mui/material/SvgIcon';
-import { styled } from '@mui/material/styles';
-import { ReactComponent as Google } from '~/assets/Google.svg';
 import LeftBG from '~/assets/left-bg.svg';
 import RightBG from '~/assets/right-bg.svg';
-// import { Input } from '@mui/material';
+import { ReactComponent as TrelloIcon } from '~/assets/trello.svg';
+import SvgIcon from '@mui/material/SvgIcon';
 import LogoAlassion from '~/assets/logo-alassian.svg';
-const GoogleButton = styled(Button)({
-  border: '1px solid',
-  lineHeight: 1.5,
-  borderColor: '#bcc2ccf7',
-});
-export default function SignIn() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
+import { Grid } from '@mui/material';
+import { path } from '~/utils/constants';
+import { testLoginGG } from '~/apis';
+function CreateUserGoogle() {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    if (!user) {
+      const fetchData = async () => {
+        try {
+          const res = await testLoginGG();
+          setUser(res.metadata.user);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+      fetchData();
+    }
+  });
+  // console.log(user);
   const dispatch = useDispatch();
+  const handleDispatch = () => {
+    dispatch(signInWithGoogle());
+  };
 
-  const handleSignInWithGoogle = () => {
-    window.open('http://localhost:8080/v1/auth/google', '_self');
-  };
-  const onSubmit = (data) => {
-    console.log('🚀 ~ onSubmit ~ data:', data);
-    dispatch(authSignIn(data));
-  };
+  // log out function to log the user out of google and set the profile array to null
+  // const logOut = () => {
+  //   googleLogout();
+  //   setProfile(null);
+  // };
 
   return (
     <Box
@@ -86,15 +89,14 @@ export default function SignIn() {
         }}
       >
         <Box
-          component="form"
-          onSubmit={handleSubmit(onSubmit)}
+          component=""
           noValidate
           sx={(theme) => ({
             //  bgcolor: 'black',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            mt: 5,
+            mt: 10,
             p: 6,
             boxShadow: theme.shadows.md,
           })}
@@ -112,108 +114,68 @@ export default function SignIn() {
             </Typography>
           </Box>
           <Typography sx={{ fontWeight: '500', p: 2 }}>
-            Sign In to Continue
+            Creat your account
           </Typography>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoFocus
-            size="small"
-            {...register('email', {
-              required: true,
-              maxLength: 100,
-              // eslint-disable-next-line no-useless-escape
-              pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-            })}
-          />
-          {errors?.email?.type === 'required' && (
-            <Typography sx={{ color: 'red' }}>
-              This field is required
-            </Typography>
-          )}
-          {errors?.email?.type === 'maxLength' && (
-            <Typography sx={{ color: 'red' }}>
-              Email cannot exceed 100 characters
-            </Typography>
-          )}
-          {errors?.email?.type === 'pattern' && (
-            <Typography sx={{ color: 'red' }}>example@gmail.com</Typography>
-          )}
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            size="small"
-            {...register('password', {
-              required: true,
-              maxLength: 25,
-              minLength: 6,
-              // pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/
-            })}
-          />
-          {errors?.password?.type === 'required' && (
-            <Typography sx={{ color: 'red' }}>
-              This field is required
-            </Typography>
-          )}
-          {errors?.password?.type === 'maxLength' && (
-            <Typography sx={{ color: 'red' }}>
-              Password cannot exceed 25 characters
-            </Typography>
-          )}
-          {errors?.password?.type === 'minLength' && (
-            <Typography sx={{ color: 'red' }}>
-              Password must not be less than 6 characters
-            </Typography>
-          )}
-
+          <Box sx={{ width: '100%' }}>
+            {user ? (
+              <Box>
+                <Box>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ color: '#6b778c', fontSize: '12px' }}
+                  >
+                    Email address
+                  </Typography>
+                  <Typography variant="subtitle2">{user.email}</Typography>
+                </Box>
+                <Box>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ color: '#6b778c', fontSize: '12px' }}
+                  >
+                    Name
+                  </Typography>
+                  <Typography variant="subtitle2">{user.name}</Typography>
+                </Box>
+              </Box>
+            ) : null}
+          </Box>
+          <Typography
+            align="left"
+            variant="body2"
+            sx={{ textAlign: 'center', fontSize: '11px', marginTop: '8px' }}
+          >
+            This site is protected by reCAPTCHA and the Google{' '}
+            <Link href="#" sx={{ textDecoration: 'none' }}>
+              Privacy Policy
+            </Link>
+            and{' '}
+            <Link href="#" sx={{ textDecoration: 'none' }}>
+              Term of Service
+            </Link>{' '}
+            apply.
+          </Typography>
           <Button
+            onClick={handleDispatch}
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2, bgcolor: '#0052cc' }}
           >
-            Sign In
+            Create your account
           </Button>
-          <Typography sx={{ color: 'grey' }}>Or continue with:</Typography>
-          <GoogleButton
-            fullWidth
-            color="text"
-            sx={{ mt: 2, mb: 2 }}
-            onClick={handleSignInWithGoogle}
-          >
-            <SvgIcon
-              component={Google}
-              fontSize="medium"
-              inheritViewBox
-              sx={{ padding: '2px' }}
-            />
-            <Typography>Google</Typography>
-          </GoogleButton>
-          <Grid container sx={{ marginBottom: '16px' }}>
-            <Grid item xs>
-              <Link href="#" variant="body2" sx={{ textDecoration: 'none' }}>
-                Can't sign in?
-              </Link>
-            </Grid>
+          <Grid container justifyContent="center" sx={{ marginBottom: '8px' }}>
             <Grid item>
               <Link
-                href={path.SignUp}
+                href={path.SignIn}
                 variant="body2"
                 sx={{ textDecoration: 'none' }}
               >
-                {"Don't have an account? Sign Up"}
+                Already have an account? Sign in
               </Link>
             </Grid>
           </Grid>
+
           <Box
             sx={{
               display: 'flex',
@@ -278,3 +240,5 @@ export default function SignIn() {
     </Box>
   );
 }
+
+export default CreateUserGoogle;
