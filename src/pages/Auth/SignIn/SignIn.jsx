@@ -201,7 +201,7 @@ export default function SignIn() {
           <Grid container sx={{ marginBottom: '16px' }}>
             <Grid item xs>
               <Link href="#" variant="body2" sx={{ textDecoration: 'none' }}>
-                Can't sign in?
+                Can not sign in?
               </Link>
             </Grid>
             <Grid item>
@@ -210,7 +210,7 @@ export default function SignIn() {
                 variant="body2"
                 sx={{ textDecoration: 'none' }}
               >
-                {"Don't have an account? Sign Up"}
+                {'Do not have an account? Sign Up'}
               </Link>
             </Grid>
           </Grid>
