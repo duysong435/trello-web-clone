@@ -36,7 +36,7 @@ export default function SignIn() {
   const handleSignInWithGoogle = () => {
     window.open('http://localhost:8080/v1/auth/google', '_self')
   }
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     console.log('🚀 ~ onSubmit ~ data:', data)
     dispatch(authSignIn(data))
   }
@@ -89,7 +89,7 @@ export default function SignIn() {
           component="form"
           onSubmit={handleSubmit(onSubmit)}
           noValidate
-          sx={theme => ({
+          sx={(theme) => ({
             //  bgcolor: 'black',
             display: 'flex',
             flexDirection: 'column',
@@ -100,20 +100,13 @@ export default function SignIn() {
           })}
         >
           <Box sx={{ display: 'flex' }}>
-            <SvgIcon
-              component={TrelloIcon}
-              fontSize="large"
-              inheritViewBox
-              sx={{ color: '#0052cc' }}
-            />
+            <SvgIcon component={TrelloIcon} fontSize="large" inheritViewBox sx={{ color: '#0052cc' }} />
 
             <Typography component="h1" variant="h5" sx={{ fontWeight: '800' }}>
               Trello
             </Typography>
           </Box>
-          <Typography sx={{ fontWeight: '500', p: 2 }}>
-            Sign In to Continue
-          </Typography>
+          <Typography sx={{ fontWeight: '500', p: 2 }}>Sign In to Continue</Typography>
           <TextField
             margin="normal"
             required
@@ -130,19 +123,9 @@ export default function SignIn() {
               pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
             })}
           />
-          {errors?.email?.type === 'required' && (
-            <Typography sx={{ color: 'red' }}>
-              This field is required
-            </Typography>
-          )}
-          {errors?.email?.type === 'maxLength' && (
-            <Typography sx={{ color: 'red' }}>
-              Email cannot exceed 100 characters
-            </Typography>
-          )}
-          {errors?.email?.type === 'pattern' && (
-            <Typography sx={{ color: 'red' }}>example@gmail.com</Typography>
-          )}
+          {errors?.email?.type === 'required' && <Typography sx={{ color: 'red' }}>This field is required</Typography>}
+          {errors?.email?.type === 'maxLength' && <Typography sx={{ color: 'red' }}>Email cannot exceed 100 characters</Typography>}
+          {errors?.email?.type === 'pattern' && <Typography sx={{ color: 'red' }}>example@gmail.com</Typography>}
           <TextField
             margin="normal"
             required
@@ -159,58 +142,27 @@ export default function SignIn() {
               // pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/
             })}
           />
-          {errors?.password?.type === 'required' && (
-            <Typography sx={{ color: 'red' }}>
-              This field is required
-            </Typography>
-          )}
-          {errors?.password?.type === 'maxLength' && (
-            <Typography sx={{ color: 'red' }}>
-              Password cannot exceed 25 characters
-            </Typography>
-          )}
-          {errors?.password?.type === 'minLength' && (
-            <Typography sx={{ color: 'red' }}>
-              Password must not be less than 6 characters
-            </Typography>
-          )}
+          {errors?.password?.type === 'required' && <Typography sx={{ color: 'red' }}>This field is required</Typography>}
+          {errors?.password?.type === 'maxLength' && <Typography sx={{ color: 'red' }}>Password cannot exceed 25 characters</Typography>}
+          {errors?.password?.type === 'minLength' && <Typography sx={{ color: 'red' }}>Password must not be less than 6 characters</Typography>}
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2, bgcolor: '#0052cc' }}
-          >
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, bgcolor: '#0052cc' }}>
             Sign In
           </Button>
           <Typography sx={{ color: 'grey' }}>Or continue with:</Typography>
-          <GoogleButton
-            fullWidth
-            color="text"
-            sx={{ mt: 2, mb: 2 }}
-            onClick={handleSignInWithGoogle}
-          >
-            <SvgIcon
-              component={Google}
-              fontSize="medium"
-              inheritViewBox
-              sx={{ padding: '2px' }}
-            />
+          <GoogleButton fullWidth color="text" sx={{ mt: 2, mb: 2 }} onClick={handleSignInWithGoogle}>
+            <SvgIcon component={Google} fontSize="medium" inheritViewBox sx={{ padding: '2px' }} />
             <Typography>Google</Typography>
           </GoogleButton>
           <Grid container sx={{ marginBottom: '16px' }}>
             <Grid item xs>
               <Link href="#" variant="body2" sx={{ textDecoration: 'none' }}>
-                Can't sign in?
+                Can not sign in?
               </Link>
             </Grid>
             <Grid item>
-              <Link
-                href={path.SignUp}
-                variant="body2"
-                sx={{ textDecoration: 'none' }}
-              >
-                {"Don't have an account? Sign Up"}
+              <Link href={path.SignUp} variant="body2" sx={{ textDecoration: 'none' }}>
+                {'Do not have an account? Sign Up'}
               </Link>
             </Grid>
           </Grid>
@@ -223,14 +175,8 @@ export default function SignIn() {
               width: '100%'
             }}
           >
-            <img
-              src={LogoAlassion}
-              style={{ marginTop: '30px', width: '160px' }}
-            />
-            <Typography
-              variant="body2"
-              sx={{ textAlign: 'center', fontSize: '11px', paddingTop: '8px' }}
-            >
+            <img src={LogoAlassion} style={{ marginTop: '30px', width: '160px' }} />
+            <Typography variant="body2" sx={{ textAlign: 'center', fontSize: '11px', paddingTop: '8px' }}>
               One account for Trello, Jira, Confluence and{' '}
               <Link href="#" sx={{ textDecoration: 'none' }}>
                 more
@@ -238,29 +184,17 @@ export default function SignIn() {
               .
             </Typography>
             <Box sx={{ marginTop: '12px', display: 'flex' }}>
-              <Typography
-                variant="body2"
-                sx={{ textAlign: 'center', fontSize: '11px' }}
-              >
+              <Typography variant="body2" sx={{ textAlign: 'center', fontSize: '11px' }}>
                 Privacy Policy
               </Typography>
-              <Typography
-                variant="body2"
-                sx={{ textAlign: 'center', fontSize: '11px', padding: '0 5px' }}
-              >
+              <Typography variant="body2" sx={{ textAlign: 'center', fontSize: '11px', padding: '0 5px' }}>
                 •
               </Typography>
-              <Typography
-                variant="body2"
-                sx={{ textAlign: 'center', fontSize: '11px' }}
-              >
+              <Typography variant="body2" sx={{ textAlign: 'center', fontSize: '11px' }}>
                 User Notice
               </Typography>
             </Box>
-            <Typography
-              variant="body2"
-              sx={{ textAlign: 'center', fontSize: '11px', marginTop: '8px' }}
-            >
+            <Typography variant="body2" sx={{ textAlign: 'center', fontSize: '11px', marginTop: '8px' }}>
               This site is protected by reCAPTCHA and the Google{' '}
               <Link href="#" sx={{ textDecoration: 'none' }}>
                 Privacy Policy
