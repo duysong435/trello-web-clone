@@ -1,13 +1,11 @@
 // Authentication  - SignIn register
 
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useState, useEffect } from 'react'
 import { signInWithGoogle } from '~/redux/authSlice'
 import Button from '@mui/material/Button'
 import Link from '@mui/material/Link'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import LeftBG from '~/assets/left-bg.svg'
 import RightBG from '~/assets/right-bg.svg'
@@ -26,7 +24,7 @@ function CreateUserGoogle() {
           const res = await testLoginGG()
           setUser(res.metadata.user)
         } catch (error) {
-          console.error('Error fetching data:', error)
+          // console.error('Error fetching data:', error)
         }
       }
       fetchData()
@@ -98,7 +96,7 @@ function CreateUserGoogle() {
             alignItems: 'center',
             mt: 10,
             p: 6,
-            boxShadow: theme.shadows.md
+            boxShadow: theme.shadowCustom.md
           })}
         >
           <Box sx={{ display: 'flex' }}>

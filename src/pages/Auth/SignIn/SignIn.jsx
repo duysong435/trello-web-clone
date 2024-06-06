@@ -1,7 +1,5 @@
-import * as React from 'react'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import Link from '@mui/material/Link'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
@@ -16,7 +14,6 @@ import { styled } from '@mui/material/styles'
 import { ReactComponent as Google } from '~/assets/google.svg'
 import LeftBG from '~/assets/left-bg.svg'
 import RightBG from '~/assets/right-bg.svg'
-// import { Input } from '@mui/material';
 import LogoAlassion from '~/assets/logo-alassian.svg'
 const GoogleButton = styled(Button)({
   border: '1px solid',
@@ -37,7 +34,7 @@ export default function SignIn() {
     window.open('http://localhost:8080/v1/auth/google', '_self')
   }
   const onSubmit = (data) => {
-    console.log('🚀 ~ onSubmit ~ data:', data)
+    // console.log('🚀 ~ onSubmit ~ data:', data)
     dispatch(authSignIn(data))
   }
 
@@ -96,7 +93,7 @@ export default function SignIn() {
             alignItems: 'center',
             mt: 5,
             p: 6,
-            boxShadow: theme.shadows.md
+            boxShadow: theme.shadowCustom.md
           })}
         >
           <Box sx={{ display: 'flex' }}>
@@ -108,6 +105,7 @@ export default function SignIn() {
           </Box>
           <Typography sx={{ fontWeight: '500', p: 2 }}>Sign In to Continue</Typography>
           <TextField
+            value={'nguyen@gmail.com'}
             margin="normal"
             required
             fullWidth
@@ -127,6 +125,7 @@ export default function SignIn() {
           {errors?.email?.type === 'maxLength' && <Typography sx={{ color: 'red' }}>Email cannot exceed 100 characters</Typography>}
           {errors?.email?.type === 'pattern' && <Typography sx={{ color: 'red' }}>example@gmail.com</Typography>}
           <TextField
+            value={'123456'}
             margin="normal"
             required
             fullWidth

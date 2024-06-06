@@ -1,7 +1,7 @@
 import SignIn from './pages/Auth/SignIn/SignIn'
 import Board from './pages/Boards/_id'
 import ErrorPage from './error-page'
-import { Route, Routes, useLocation, Navigate } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import SignUp from './pages/Auth/SignUp/SignUp'
 import { path } from './utils/constants'
 import PublicRoutes from './components/Auth/publicRoute'

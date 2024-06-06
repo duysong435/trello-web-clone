@@ -1,16 +1,13 @@
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import Link from '@mui/material/Link'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
-import Container from '@mui/material/Container'
 import { path } from '~/utils/constants'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { authSignIn, authSignUp } from '~/redux/authSlice'
+import { authSignUp } from '~/redux/authSlice'
 import LeftBG from '~/assets/left-bg.svg'
 import RightBG from '~/assets/right-bg.svg'
 import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
@@ -18,8 +15,6 @@ import SvgIcon from '@mui/material/SvgIcon'
 import { styled } from '@mui/material/styles'
 import { ReactComponent as Google } from '~/assets/google.svg'
 import LogoAlassion from '~/assets/logo-alassian.svg'
-import { useEffect } from 'react'
-import axios from 'axios'
 
 const GoogleButton = styled(Button)({
   border: '1px solid',
@@ -100,7 +95,7 @@ export default function SignUp() {
             alignItems: 'center',
             mt: 5,
             p: 6,
-            boxShadow: theme.shadows.md
+            boxShadow: theme.shadowCustom.md
           })}
         >
           <Box sx={{ display: 'flex' }}>

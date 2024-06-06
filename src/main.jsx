@@ -1,19 +1,19 @@
 // import React from 'react'
-import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
-import CssBaseline from '@mui/material/CssBaseline';
-import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles';
-import theme from './theme';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { BrowserRouter } from 'react-router-dom';
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import CssBaseline from '@mui/material/CssBaseline'
+import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles'
+import theme from './theme'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { GoogleOAuthProvider } from '@react-oauth/google'
+import { BrowserRouter } from 'react-router-dom'
 //Cấu hình mui dialog
-import { ConfirmProvider } from 'material-ui-confirm';
+import { ConfirmProvider } from 'material-ui-confirm'
 
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistor, store } from './redux/store.js';
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistor, store } from './redux/store.js'
 // import { GoogleOAuthProvider } from '@react-oauth/google';
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
@@ -29,8 +29,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               cancellationButtonProps: { color: 'inherit' },
               confirmationButtonProps: {
                 color: 'secondary',
-                variant: 'outlined',
-              },
+                variant: 'outlined'
+              }
             }}
           >
             <CssBaseline />
@@ -53,5 +53,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </BrowserRouter>
     </PersistGate>
   </Provider>
-  // </React.StrictMode>
-);
+)
