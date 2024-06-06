@@ -1,10 +1,9 @@
-import { Outlet, Navigate } from 'react-router-dom'
-import { useAuth } from '~/customHooks/useAuth'
-
+import { Outlet, Navigate } from 'react-router-dom';
+import { useAuth } from '~/customHooks/useAuth';
 
 function PublicRoutes() {
-  const token = useAuth()
-  return token ? <Navigate to='/' /> : <Outlet />
+  const token = useAuth();
+  return token ? <Navigate to="/" /> : <Outlet />;
 }
 
-export default PublicRoutes
+export default PublicRoutes;
