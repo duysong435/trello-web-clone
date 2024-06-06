@@ -11,9 +11,8 @@ const authSlice = createSlice({
     refreshToken: null,
     userId: null
   },
-  reducers: {
-  },
-  extraReducers: (builder) => {
+  reducers: {},
+  extraReducers: builder => {
     builder
       .addCase(authSignIn.pending, (state, action) => {
         state.status = 'loading'
@@ -49,22 +48,25 @@ const authSlice = createSlice({
   }
 })
 
+export const signInWithGoogle = createAsyncThunk('auth/login', async () => {
+  const res = await axios.get('http://localhost:8080/v1/auth/login/success', {
+    withCredentials: true
+  })
+  // console.log(res);
+  return res.metadata
+})
 
-export const authSignIn = createAsyncThunk(
-  'auth/login',
-  async (dataSignin) => {
-    const res = await axios.post('/user/login', dataSignin)
-    return res.metadata
-  }
-)
+export const authSignIn = createAsyncThunk('auth/login', async dataSignin => {
+  const res = await axios.post('/user/login', dataSignin)
+  return res.metadata
+})
 
 export const authSignUp = createAsyncThunk(
   'auth/register',
-  async (dataSignUp) => {
+  async dataSignUp => {
     const res = await axios.post('/user/signup', dataSignUp)
     return res.metadata
   }
 )
-
 
 export default authSlice

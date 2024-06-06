@@ -19,12 +19,12 @@ import CloseIcon from '@mui/icons-material/Close'
 import { toast } from 'react-toastify'
 import { useConfirm } from 'material-ui-confirm'
 
-
 import AddCardIcon from '@mui/icons-material/AddCard'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import AppBar from '~/components/AppBar/AppBoard'
 import DashboardHome from './Dashboard/Dashboard'
-
+import { useEffect } from 'react'
+import { signInWithGoogle } from '~/redux/authSlice'
 
 export default function HomePage() {
   return (

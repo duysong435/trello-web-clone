@@ -5,5 +5,7 @@ export const path = {
   Home: '/',
   SignUp: 'register',
   SignIn: 'login',
-  Board: 'board'
+  Board: 'board',
+  CreateUserGoogle: 'auth',
+  PostAuth: 'postAuth'
 }

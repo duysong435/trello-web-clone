@@ -14,20 +14,23 @@ import { ConfirmProvider } from 'material-ui-confirm'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from './redux/store.js'
-
+// import { GoogleOAuthProvider } from '@react-oauth/google';
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
-        {/* <GoogleOAuthProvider clientId="960407217693-5eh8g4ao3o301fqbqq05c377pd72k99e.apps.googleusercontent.com"> */}
+        {/* <GoogleOAuthProvider clientId="940760443011-00p0cutq3kb4sj4aq435h92e9lam85ra.apps.googleusercontent.com"> */}
         <CssVarsProvider theme={theme}>
           <ConfirmProvider
             defaultOptions={{
               allowClose: false,
               dialogProps: { maxWidth: 'xs' },
               cancellationButtonProps: { color: 'inherit' },
-              confirmationButtonProps: { color: 'secondary', variant: 'outlined' }
+              confirmationButtonProps: {
+                color: 'secondary',
+                variant: 'outlined'
+              }
             }}
           >
             <CssBaseline />
@@ -50,5 +53,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </BrowserRouter>
     </PersistGate>
   </Provider>
-  // </React.StrictMode>
 )

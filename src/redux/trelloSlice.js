@@ -10,7 +10,7 @@ const trelloSlice = createSlice({
       state.push(action.payload)
     }
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(getAllForUser.pending, (state, action) => {
         state.status = 'loading'
@@ -19,7 +19,6 @@ const trelloSlice = createSlice({
         state.status = 'idle'
         state.boards = action.payload.metadata
       })
-
 
       .addCase(addNewBoard.pending, (state, action) => {
         state.status = 'loading'
@@ -44,13 +43,11 @@ export const getAllForUser = createAsyncThunk('trello/getAll', async () => {
 
 export const addNewBoard = createAsyncThunk(
   'trello/addNewBoard',
-  async (newBoard) => {
+  async newBoard => {
     const res = await axios.post('/boards', newBoard)
     // console.log('🚀 ~ res:', res)
     return res
   }
 )
 
-
 export default trelloSlice
-
