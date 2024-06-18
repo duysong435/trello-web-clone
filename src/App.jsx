@@ -20,6 +20,7 @@ function App() {
           <Route path={path.SignIn} element={<SignIn />} />
           <Route path={path.SignUp} element={<SignUp />} />
         </Route>
+
         <Route element={<PrivateRoutes />}>
           <Route path={path.Board + '/:id'} element={<Board />} />
           <Route path={path.Home} element={<HomePage />} />
