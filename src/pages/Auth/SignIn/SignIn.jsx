@@ -18,14 +18,14 @@ import LogoAlassion from '~/assets/logo-alassian.svg'
 const GoogleButton = styled(Button)({
   border: '1px solid',
   lineHeight: 1.5,
-  borderColor: '#bcc2ccf7'
+  borderColor: '#bcc2ccf7',
 })
 export default function SignIn() {
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors }
+    formState: { errors },
   } = useForm()
 
   const dispatch = useDispatch()
@@ -45,7 +45,7 @@ export default function SignIn() {
         bgcolor: '#fafbfc',
         height: '100vh',
         position: 'relative',
-        top: '0'
+        top: '0',
       }}
     >
       <Box sx={{ display: { xs: 'none', md: 'flex', gap: 1 } }}>
@@ -56,7 +56,7 @@ export default function SignIn() {
             position: 'absolute',
             bottom: '0',
             right: '0',
-            width: '27%'
+            width: '27%',
           }}
         />
       </Box>
@@ -68,7 +68,7 @@ export default function SignIn() {
             position: 'absolute',
             bottom: '0',
             left: '0',
-            width: '27%'
+            width: '27%',
           }}
         />
       </Box>
@@ -79,7 +79,7 @@ export default function SignIn() {
           flexDirection: 'column',
           alignItems: 'center',
           width: '400px',
-          margin: 'auto'
+          margin: 'auto',
         }}
       >
         <Box
@@ -93,7 +93,7 @@ export default function SignIn() {
             alignItems: 'center',
             mt: 5,
             p: 6,
-            boxShadow: theme.shadowCustom.md
+            boxShadow: theme.shadowCustom.md,
           })}
         >
           <Box sx={{ display: 'flex' }}>
@@ -118,7 +118,7 @@ export default function SignIn() {
               required: true,
               maxLength: 100,
               // eslint-disable-next-line no-useless-escape
-              pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+              pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
             })}
           />
           {errors?.email?.type === 'required' && <Typography sx={{ color: 'red' }}>This field is required</Typography>}
@@ -137,7 +137,7 @@ export default function SignIn() {
             {...register('password', {
               required: true,
               maxLength: 25,
-              minLength: 6
+              minLength: 6,
               // pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/
             })}
           />
@@ -156,7 +156,7 @@ export default function SignIn() {
           <Grid container sx={{ marginBottom: '16px' }}>
             <Grid item xs>
               <Link href="#" variant="body2" sx={{ textDecoration: 'none' }}>
-                Can not sign in?
+                Can not sign in? Can not sign in?
               </Link>
             </Grid>
             <Grid item>
@@ -171,7 +171,7 @@ export default function SignIn() {
               alignItems: 'center',
               flexDirection: 'column',
               borderTop: '1px solid #c1c7d0',
-              width: '100%'
+              width: '100%',
             }}
           >
             <img src={LogoAlassion} style={{ marginTop: '30px', width: '160px' }} />

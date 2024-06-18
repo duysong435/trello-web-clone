@@ -9,6 +9,7 @@ import PrivateRoutes from './components/Auth/privateRoute'
 import HomePage from './pages/Home'
 import CreateUserGoogle from './pages/Auth/MiddlewareLoginWithGoogle/CreateGoogle'
 import PostAuth from './pages/Auth/MiddlewareLoginWithGoogle/PostAuth'
+import Workspace from './pages/Workspace'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path={path.SignUp} element={<SignUp />} />
         </Route>
         <Route element={<PrivateRoutes />}>
+          <Route path={path.Workspace} element={<Workspace />} />
           <Route path={path.Board + '/:id'} element={<Board />} />
           <Route path={path.Home} element={<HomePage />} />
         </Route>

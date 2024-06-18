@@ -11,5 +11,6 @@
   "htmlWhitespaceSensitivity": "css",
   "proseWrap": "preserve",
   "insertPragma": false,
-  "requirePragma": false
+  "requirePragma": false,
+  "trailingComma": "none"
 }

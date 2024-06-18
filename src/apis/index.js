@@ -47,7 +47,7 @@ export const createNewCardAPI = async (newCardData) => {
 
 export const testLoginGG = async () => {
   const response = await axios.get(`${API_ROOT}/v1/auth/login/success`, {
-    withCredentials: true
+    withCredentials: true,
   })
   return response
 }
