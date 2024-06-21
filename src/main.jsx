@@ -29,8 +29,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               cancellationButtonProps: { color: 'inherit' },
               confirmationButtonProps: {
                 color: 'secondary',
-                variant: 'outlined'
-              }
+                variant: 'outlined',
+              },
             }}
           >
             <CssBaseline />
@@ -52,5 +52,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         {/* </GoogleOAuthProvider> */}
       </BrowserRouter>
     </PersistGate>
-  </Provider>
+  </Provider>,
 )

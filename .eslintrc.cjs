@@ -1,4 +1,4 @@
-// Updated by trungquandev.com's author on May 13 2023
+
 // Sample Eslint config for React project
 module.exports = {
   env: { browser: true, es2020: true, node: true },
@@ -6,14 +6,17 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended'
+    'plugin:react-hooks/recommended',
+    "plugin:prettier/recommended",
+    'eslint-config-prettier'
   ],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
   plugins: [
     'react',
     'react-hooks',
-    'react-refresh'
+    'react-refresh',
+    'prettier'
   ],
   rules: {
     //React
@@ -48,8 +51,9 @@ module.exports = {
     'linebreak-style': 0,
     'no-unexpected-multiline': 'warn',
     'keyword-spacing': 1,
-    'comma-dangle': 1,
+    'comma-dangle': 0,
     'comma-spacing': 1,
-    'arrow-spacing': 1
+    'arrow-spacing': 1,
+    'prettier/prettier': 'error'
   }
 }

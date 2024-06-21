@@ -39,7 +39,7 @@ export const getAllForUser = createAsyncThunk('trello/getAll', async () => {
   const res = await axios.get('/boards/get-all-board')
   console.log('🚀 ~ getAllForUser ~ res:', res)
   return res
-})
+}) 
 
 export const addNewBoard = createAsyncThunk(
   'trello/addNewBoard',
