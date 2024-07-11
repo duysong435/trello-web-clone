@@ -18,7 +18,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  blacklist: ['trello'],
+  blacklist: ['trello']
 }
 
 const authPersistConfig = {

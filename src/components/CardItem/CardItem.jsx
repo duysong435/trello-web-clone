@@ -29,7 +29,7 @@ export default function CardItem({ item }) {
       borderRadius: '5px',
       backgroundColor: '#ccc',
       padding: 2,
-      backgroundImage: 'url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x320/3cf79197f2d0b9c0b14958e1bb1d9c8e/photo-1709374601273-57d0a44c9437.jpg)',
+      backgroundImage: 'url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/640x960/5d1b657b79c0c7880dda3b6c5e8b2732/photo-1716718405882-5d80d89ea24e.webp)',
       backgroundSize: 'cover',
       position: 'relative'
     }}>

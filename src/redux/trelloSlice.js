@@ -7,7 +7,10 @@ const trelloSlice = createSlice({
   initialState: { status: 'idle', boards: [], disableDrag: false },
   reducers: {
     disableDragApp: (state, action) => {
-      state.disableDrag = !state.disableDrag
+      state.disableDrag = true
+    },
+    enableDragApp: (state, action) => {
+      state.disableDrag = false
     }
   },
   extraReducers: (builder) => {
@@ -37,6 +40,19 @@ const trelloSlice = createSlice({
         state.status = 'idle'
         toast.error('create failed!')
       })
+
+      .addCase(updateCard.pending, (state, action) => {
+        state.status = 'loading'
+      })
+      .addCase(updateCard.fulfilled, (state, action) => {
+        state.status = 'idle'
+        // state.boards.push(action.payload)
+        toast.success('create success!')
+      })
+      .addCase(updateCard.rejected, (state, action) => {
+        state.status = 'idle'
+        toast.error('create failed!')
+      })
   }
 })
 
@@ -55,6 +71,12 @@ export const addNewBoard = createAsyncThunk(
   }
 )
 
-export const { disableDragApp } = trelloSlice.actions
+export const updateCard = createAsyncThunk('trello/updateCard', async (data) => {
+  const res = await axios.put('/cards', data)
+  // console.log('🚀 ~ res:', res)
+  return res
+})
+
+export const { disableDragApp, enableDragApp } = trelloSlice.actions
 export default trelloSlice
 

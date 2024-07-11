@@ -22,7 +22,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import PersonalVideoIcon from '@mui/icons-material/PersonalVideo'
 import IconButton from '@mui/material/IconButton'
 
-function CardHeader() {
+function CardHeader({ onClose, title }) {
 
 
   return (
@@ -41,12 +41,12 @@ function CardHeader() {
       }}>
         <PersonalVideoIcon />
       </Box>
-      <Typography component={'h3'} variant=''>Bánh mì</Typography>
+      <Typography component={'h3'} variant=''>{title}</Typography>
       <Box sx={{
         position: 'absolute',
         right: '12px'
       }}>
-        <IconButton >
+        <IconButton onClick={() => onClose()} >
           <CloseIcon />
         </IconButton>
       </Box>

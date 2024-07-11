@@ -49,6 +49,10 @@ function Card({ card }) {
     dispatch(disableDragApp())
   }
 
+  const handleClose = () => {
+    setOpen(!open)
+  }
+
   return (
     <MuiCard
       ref={setNodeRef}
@@ -94,7 +98,7 @@ function Card({ card }) {
           }
         </CardActions>
       }
-      <ModalCard isOpen={open} handleToggle={handleToggle} />
+      <ModalCard isOpen={open} onClose={handleClose} card={card} />
     </MuiCard>
   )
 }

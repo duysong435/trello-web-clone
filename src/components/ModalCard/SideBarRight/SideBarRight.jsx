@@ -32,7 +32,9 @@ import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark'
 function SideBarRight() {
 
   return (
-    <Box>
+    <Box sx={{
+      paddingLeft: 1
+    }}>
       <List
         sx={{
           '& .MuiButtonBase-root ': {
@@ -45,7 +47,11 @@ function SideBarRight() {
             borderRadius: 1,
             '& .MuiListItemIcon-root': {
               minWidth: 0,
-              paddingX: 1
+              paddingX: 1,
+              '& .MuiSvgIcon-root': {
+                fontSize: '16px'
+
+              }
             },
             '& .MuiListItemText-root ': {
               width: '100px'
@@ -59,7 +65,8 @@ function SideBarRight() {
             sx={{
               fontSize: 12,
               lineHeight: '16px',
-              paddingLeft: 0
+              paddingLeft: 0,
+              backgroundColor: '#F1F2F4'
             }}
             component="div" id="nested-list-subheader">
             Add to cards
@@ -129,7 +136,11 @@ function SideBarRight() {
             borderRadius: 1,
             '& .MuiListItemIcon-root': {
               minWidth: 0,
-              paddingX: 1
+              paddingX: 1,
+              '& .MuiSvgIcon-root': {
+                fontSize: '16px'
+
+              }
             },
             '& .MuiListItemText-root ': {
               width: '100px'
@@ -143,7 +154,8 @@ function SideBarRight() {
             sx={{
               fontSize: 12,
               lineHeight: '16px',
-              paddingLeft: 0
+              paddingLeft: 0,
+              backgroundColor: '#F1F2F4'
             }}
             component="div" id="nested-list-subheader">
             Power-Ups
@@ -171,7 +183,11 @@ function SideBarRight() {
             borderRadius: 1,
             '& .MuiListItemIcon-root': {
               minWidth: 0,
-              paddingX: 1
+              paddingX: 1,
+              '& .MuiSvgIcon-root': {
+                fontSize: '16px'
+
+              }
             },
             '& .MuiListItemText-root ': {
               width: '100px'
@@ -185,7 +201,8 @@ function SideBarRight() {
             sx={{
               fontSize: 12,
               lineHeight: '16px',
-              paddingLeft: 0
+              paddingLeft: 0,
+              backgroundColor: '#F1F2F4'
             }}
             component="div" id="nested-list-subheader">
             Actions
@@ -212,10 +229,15 @@ function SideBarRight() {
             borderRadius: 1,
             '& .MuiListItemIcon-root': {
               minWidth: 0,
-              paddingX: 1
+              paddingX: 1,
+              '& .MuiSvgIcon-root': {
+                fontSize: '16px'
+
+              }
             },
             '& .MuiListItemText-root ': {
-              width: '100px'
+              width: '100px',
+
             }
           }
         }}
@@ -226,7 +248,8 @@ function SideBarRight() {
             sx={{
               fontSize: 12,
               lineHeight: '16px',
-              paddingLeft: 0
+              paddingLeft: 0,
+              backgroundColor: '#F1F2F4'
             }}
             component="div" id="nested-list-subheader">
             Add to cards

@@ -17,7 +17,7 @@ import { path } from '~/utils/constants'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import SelectValue from '~/components/SelectValue/SelectValue'
-import { addNewBoard } from '~/redux/trelloSlice'
+import { addNewBoard, enableDragApp } from '~/redux/trelloSlice'
 import CardHeader from './CardHeader/CardHeader'
 import SideBarRight from './SideBarRight/SideBarRight'
 import MainModal from './MainModal/MainModal'
@@ -27,7 +27,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 770,
+  width: 'auto',
   bgcolor: 'background.paper',
   border: 'none',
   boxShadow: 24,
@@ -35,10 +35,14 @@ const style = {
   borderRadius: '10px',
   display: 'flex',
   flexDirection: 'column',
-  gap: 2
+  gap: 2,
+  // my: 50
+  height: 'auto',
+  maxHeight: '90vh',
+  backgroundColor: '#F1F2F4'
 }
 
-function ModalCard({ isOpen, handleToggle }) {
+function ModalCard({ isOpen, onClose, card }) {
 
   const {
     register,
@@ -55,8 +59,23 @@ function ModalCard({ isOpen, handleToggle }) {
     dispatch(addNewBoard(data))
     handleToggle()
   }
+
+  const handleToggle = () => {
+    dispatch(enableDragApp())
+    onClose()
+  }
+
+  React.useEffect(() => {
+
+  })
   return (
     <Modal
+      sx={{
+        zIndex: 1,
+        // overflow: 'scroll',
+        // marginBottom: 10
+
+      }}
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       open={isOpen}
@@ -73,15 +92,15 @@ function ModalCard({ isOpen, handleToggle }) {
         <Box component={'form'} onSubmit={handleSubmit(onSubmit)} sx={style}>
           <Box sx={{
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
           }}>
-            <CardHeader />
+            <CardHeader onClose={handleToggle} title={card?.title} />
             <Box sx={{
               display: 'grid',
               gridTemplateColumns: '10fr 2fr'
             }}>
               <Box>
-                <MainModal />
+                <MainModal card={card} />
               </Box>
               <SideBarRight />
             </Box>
