@@ -16,6 +16,13 @@ const theme = extendTheme({
     columnHeaderHeight: COLUMN_HEADER_HEIGHT,
     columnFooterHeight: COLUMN_FOOTER_HEIGHT
   },
+  shadowCustom: {
+    xs: '0px 1px 2px rgba(0, 0, 0, 0.1)',
+    sm: '0px 1px 3px rgba(0, 0, 0, 0.12)',
+    md: '0px 3px 6px rgba(0, 0, 0, 0.16)',
+    lg: '0px 10px 20px rgba(0, 0, 0, 0.2)',
+    xl: '0px 20px 40px rgba(0, 0, 0, 0.25)'
+  },
   colorSchemes: {
     // light: {
     //   palette: {
@@ -27,7 +34,6 @@ const theme = extendTheme({
     //   palette: {
     //     primary: cyan,
     //     secondary: orange
-
     //   }
     // }
   },

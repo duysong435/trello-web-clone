@@ -13,7 +13,7 @@ const trelloSlice = createSlice({
       state.disableDrag = false
     }
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(getAllForUser.pending, (state, action) => {
         state.status = 'loading'
@@ -26,7 +26,6 @@ const trelloSlice = createSlice({
         state.status = 'idle'
         toast.error('Failed!')
       })
-
 
       .addCase(addNewBoard.pending, (state, action) => {
         state.status = 'loading'
@@ -64,13 +63,14 @@ export const getAllForUser = createAsyncThunk('trello/getAll', async () => {
 
 export const addNewBoard = createAsyncThunk(
   'trello/addNewBoard',
-  async (newBoard) => {
+  async newBoard => {
     const res = await axios.post('/boards', newBoard)
     // console.log('🚀 ~ res:', res)
     return res
   }
 )
 
+<<<<<<< HEAD
 export const updateCard = createAsyncThunk('trello/updateCard', async (data) => {
   const res = await axios.put('/cards', data)
   // console.log('🚀 ~ res:', res)
@@ -78,5 +78,6 @@ export const updateCard = createAsyncThunk('trello/updateCard', async (data) => 
 })
 
 export const { disableDragApp, enableDragApp } = trelloSlice.actions
+=======
+>>>>>>> master
 export default trelloSlice
-

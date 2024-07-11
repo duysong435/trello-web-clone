@@ -1,4 +1,3 @@
-
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import {
   persistStore,
@@ -23,14 +22,14 @@ const persistConfig = {
 
 const authPersistConfig = {
   key: 'auth',
-  storage: storage,
+  storage: storage
   // blacklist: ['trello'], // Không lưu trạng thái của trelloSlice
-};
+}
 const trelloPersistConfig = {
   key: 'trello',
-  storage: storage,
+  storage: storage
   // blacklist: ['boards'] // Không lưu trạng thái của trelloSlice
-};
+}
 
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authSlice.reducer),
@@ -42,11 +41,11 @@ const rootReducer = combineReducers({
 // })
 
 // const persistedReducer = persistReducer(persistConfig, rootReducer)
-const persistedReducer = rootReducer;
+const persistedReducer = rootReducer
 
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
