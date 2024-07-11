@@ -4,10 +4,13 @@ import { toast } from 'react-toastify'
 
 const trelloSlice = createSlice({
   name: 'trello',
-  initialState: { status: 'idle', boards: [] },
+  initialState: { status: 'idle', boards: [], disableDrag: false },
   reducers: {
-    addColumn: (state, action) => {
-      state.push(action.payload)
+    disableDragApp: (state, action) => {
+      state.disableDrag = true
+    },
+    enableDragApp: (state, action) => {
+      state.disableDrag = false
     }
   },
   extraReducers: builder => {
@@ -18,6 +21,10 @@ const trelloSlice = createSlice({
       .addCase(getAllForUser.fulfilled, (state, action) => {
         state.status = 'idle'
         state.boards = action.payload.metadata
+      })
+      .addCase(getAllForUser.rejected, (state, action) => {
+        state.status = 'idle'
+        toast.error('Failed!')
       })
 
       .addCase(addNewBoard.pending, (state, action) => {
@@ -32,12 +39,25 @@ const trelloSlice = createSlice({
         state.status = 'idle'
         toast.error('create failed!')
       })
+
+      .addCase(updateCard.pending, (state, action) => {
+        state.status = 'loading'
+      })
+      .addCase(updateCard.fulfilled, (state, action) => {
+        state.status = 'idle'
+        // state.boards.push(action.payload)
+        toast.success('create success!')
+      })
+      .addCase(updateCard.rejected, (state, action) => {
+        state.status = 'idle'
+        toast.error('create failed!')
+      })
   }
 })
 
 export const getAllForUser = createAsyncThunk('trello/getAll', async () => {
   const res = await axios.get('/boards/get-all-board')
-  console.log('🚀 ~ getAllForUser ~ res:', res)
+  // console.log('🚀 ~ getAllForUser ~ res:', res)
   return res
 })
 
@@ -50,4 +70,14 @@ export const addNewBoard = createAsyncThunk(
   }
 )
 
+<<<<<<< HEAD
+export const updateCard = createAsyncThunk('trello/updateCard', async (data) => {
+  const res = await axios.put('/cards', data)
+  // console.log('🚀 ~ res:', res)
+  return res
+})
+
+export const { disableDragApp, enableDragApp } = trelloSlice.actions
+=======
+>>>>>>> master
 export default trelloSlice

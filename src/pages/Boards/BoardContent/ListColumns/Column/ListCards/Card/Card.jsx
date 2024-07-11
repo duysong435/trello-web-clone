@@ -11,7 +11,17 @@ import AttachmentIcon from '@mui/icons-material/Attachment'
 import CommentIcon from '@mui/icons-material/Comment'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import ModalCard from '~/components/ModalCard/ModalCard'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { disableDragApp } from '~/redux/trelloSlice'
 function Card({ card }) {
+
+  const [open, setOpen] = useState(false)
+
+  const trello = useSelector(state => state.trello.disableDrag)
+  const dispatch = useDispatch()
+
   const {
     attributes,
     listeners,
@@ -19,7 +29,7 @@ function Card({ card }) {
     transform,
     transition,
     isDragging
-  } = useSortable({ id: card._id, data: { ...card } })
+  } = useSortable({ id: card._id, data: { ...card }, disabled: trello })
 
   const dndKitCardStyles = {
     // touchAction: 'none',
@@ -32,6 +42,17 @@ function Card({ card }) {
   const shouldShowCardActions = () => {
     return !!card?.memberIds?.length || !!card?.comments?.length || !!card?.attachments?.length
   }
+
+
+  const handleToggle = () => {
+    setOpen(!open)
+    dispatch(disableDragApp())
+  }
+
+  const handleClose = () => {
+    setOpen(!open)
+  }
+
   return (
     <MuiCard
       ref={setNodeRef}
@@ -56,7 +77,9 @@ function Card({ card }) {
         />
 
       }
-      <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
+      <CardContent
+        onClick={handleToggle}
+        sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
         <Typography >
           {card?.title}
         </Typography>
@@ -75,7 +98,7 @@ function Card({ card }) {
           }
         </CardActions>
       }
-
+      <ModalCard isOpen={open} onClose={handleClose} card={card} />
     </MuiCard>
   )
 }

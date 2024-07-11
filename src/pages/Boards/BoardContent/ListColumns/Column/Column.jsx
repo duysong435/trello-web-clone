@@ -26,8 +26,10 @@ import ListCard from './ListCards/ListCard'
 
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { useSelector } from 'react-redux'
 
-function Column({ column, createNewCard ,deleteColumnDetails}) {
+function Column({ column, createNewCard, deleteColumnDetails }) {
+  const trello = useSelector(state => state.trello.disableDrag)
   const {
     attributes,
     listeners,
@@ -35,7 +37,7 @@ function Column({ column, createNewCard ,deleteColumnDetails}) {
     transform,
     transition,
     isDragging
-  } = useSortable({ id: column._id, data: { ...column } })
+  } = useSortable({ id: column._id, data: { ...column }, disabled: trello })
 
   const dndKitColumStyles = {
     // touchAction: 'none',

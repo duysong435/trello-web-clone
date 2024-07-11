@@ -107,6 +107,7 @@ export default function SignIn() {
           <TextField
             value={'nguyen@gmail.com'}
             margin="normal"
+            value={'test@gmail.com'}
             required
             fullWidth
             id="email"
@@ -127,6 +128,7 @@ export default function SignIn() {
           <TextField
             value={'123456'}
             margin="normal"
+            value={'123456'}
             required
             fullWidth
             name="password"
