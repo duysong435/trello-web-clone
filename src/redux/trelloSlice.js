@@ -70,7 +70,6 @@ export const addNewBoard = createAsyncThunk(
   }
 )
 
-<<<<<<< HEAD
 export const updateCard = createAsyncThunk('trello/updateCard', async (data) => {
   const res = await axios.put('/cards', data)
   // console.log('🚀 ~ res:', res)
@@ -78,6 +77,4 @@ export const updateCard = createAsyncThunk('trello/updateCard', async (data) => 
 })
 
 export const { disableDragApp, enableDragApp } = trelloSlice.actions
-=======
->>>>>>> master
 export default trelloSlice
