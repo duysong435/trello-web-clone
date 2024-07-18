@@ -9,10 +9,10 @@ const authSlice = createSlice({
     data: null,
     accessToken: null,
     refreshToken: null,
-    userId: null
+    userId: null,
   },
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(authSignIn.pending, (state, action) => {
         state.status = 'loading'
@@ -23,6 +23,15 @@ const authSlice = createSlice({
         state.accessToken = action.payload.tokens.accessToken
         state.refreshToken = action.payload.tokens.refreshToken
         state.userId = action.payload.user._id
+
+        const authState = JSON.stringify({
+          userId: action.payload.user._id,
+          accessToken: action.payload.tokens.accessToken,
+          refreshToken: action.payload.tokens.refreshToken,
+          status: 'idle', // Thêm các trường khác nếu có
+          data: action.payload.user, // Thêm các trường khác nếu có
+        })
+        window.localStorage.setItem('persist:auth', `${authState}`)
         toast.success('Login success!')
       })
       .addCase(authSignIn.rejected, (state, action) => {
@@ -45,28 +54,25 @@ const authSlice = createSlice({
         state.status = 'idle'
         toast.error(' failed!')
       })
-  }
+  },
 })
 
 export const signInWithGoogle = createAsyncThunk('auth/login', async () => {
-  const res = await axios.get('http://localhost:8080/v1/auth/login/success', {
-    withCredentials: true
+  const res = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}/auth/login/success`, {
+    withCredentials: true,
   })
   // console.log(res);
   return res.metadata
 })
 
-export const authSignIn = createAsyncThunk('auth/login', async dataSignin => {
+export const authSignIn = createAsyncThunk('auth/login', async (dataSignin) => {
   const res = await axios.post('/user/login', dataSignin)
   return res.metadata
 })
 
-export const authSignUp = createAsyncThunk(
-  'auth/register',
-  async dataSignUp => {
-    const res = await axios.post('/user/signup', dataSignUp)
-    return res.metadata
-  }
-)
+export const authSignUp = createAsyncThunk('auth/register', async (dataSignUp) => {
+  const res = await axios.post('/user/signup', dataSignUp)
+  return res.metadata
+})
 
 export default authSlice

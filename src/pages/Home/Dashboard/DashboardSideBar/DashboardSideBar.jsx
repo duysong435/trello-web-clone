@@ -28,22 +28,27 @@ export default function DashboardSideBar() {
       sx={{ width: '100%', maxWidth: 250, bgcolor: 'background.paper' }}
       component="nav"
       aria-labelledby="nested-list-subheader"
-    // subheader={
-    //   <ListSubheader component="div" id="nested-list-subheader">
-    //     Nested List Items
-    //   </ListSubheader>
-    // }
+      // subheader={
+      //   <ListSubheader component="div" id="nested-list-subheader">
+      //     Nested List Items
+      //   </ListSubheader>
+      // }
     >
       <ListItemButton>
         <ListItemIcon>
-          <SvgIcon component={TrelloIcon} fontSize='medium' inheritViewBox sx={{ color: '#1565c0' }} />
+          <SvgIcon
+            component={TrelloIcon}
+            fontSize="medium"
+            inheritViewBox
+            sx={{ color: '#1565c0' }}
+          />
         </ListItemIcon>
         <ListItemText primary="Boards" />
       </ListItemButton>
 
       <ListItemButton>
         <ListItemIcon>
-          <SvgIcon component={TrelloIcon} fontSize='medium' inheritViewBox />
+          <SvgIcon component={TrelloIcon} fontSize="medium" inheritViewBox />
         </ListItemIcon>
         <ListItemText primary="Template" />
       </ListItemButton>

@@ -21,29 +21,33 @@ import { path } from '~/utils/constants'
 
 export default function CardItem({ item }) {
   return (
-    <Box sx={{
-      // borderStyle: 'solid',
-      // borderWidth: '1px',
-      width: '200px',
-      height: '100px',
-      borderRadius: '5px',
-      backgroundColor: '#ccc',
-      padding: 2,
-      backgroundImage: 'url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x320/3cf79197f2d0b9c0b14958e1bb1d9c8e/photo-1709374601273-57d0a44c9437.jpg)',
-      backgroundSize: 'cover',
-      position: 'relative'
-    }}>
-      <Link to={path.Board + '/' + item._id}
+    <Box
+      sx={{
+        // borderStyle: 'solid',
+        // borderWidth: '1px',
+        width: '200px',
+        height: '100px',
+        borderRadius: '5px',
+        backgroundColor: '#ccc',
+        padding: 2,
+        backgroundImage:
+          'url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x320/3cf79197f2d0b9c0b14958e1bb1d9c8e/photo-1709374601273-57d0a44c9437.jpg)',
+        backgroundSize: 'cover',
+        position: 'relative',
+      }}
+    >
+      <Link
+        to={'/' + path.Board + '/' + item._id}
         // style="background-color: rgb(131, 140, 145)"
         style={{
           textDecoration: 'none',
           color: 'black',
           // position: 'relative',
-          width: '100%'
+          width: '100%',
         }}
       >
         <Typography
-          variant='subtitle1'
+          variant="subtitle1"
           component={'h3'}
           sx={{
             fontWeight: 600,
@@ -54,12 +58,12 @@ export default function CardItem({ item }) {
             // display: '-webkit-box',
             // WebkitBoxOrient: 'vertical',
             // WebkitLineClamp: 1
-
           }}
           noWrap={true}
-
-        >{item.title} </Typography>
+        >
+          {item.title}{' '}
+        </Typography>
       </Link>
-    </Box >
+    </Box>
   )
 }

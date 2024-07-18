@@ -22,16 +22,19 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 import ListSubheader from '@mui/material/ListSubheader'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 import TableChartIcon from '@mui/icons-material/TableChart'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+
 const drawerWidth = 260
 const CustomListItemButton = styled(ListItemButton)({
   height: '32px',
-  padding: '0 0 0 16px'
+  padding: '0 0 0 16px',
 })
 const CustomListItemIcon = styled(ListItemIcon)({
   minWidth: '32px', // Đảm bảo kích thước icon container
   display: 'flex',
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
 })
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -40,7 +43,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   //   ...theme.mixins.toolbar,
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
 }))
 
 const CustomAddIcon = styled(AddIcon)(({ theme }) => ({
@@ -49,14 +52,17 @@ const CustomAddIcon = styled(AddIcon)(({ theme }) => ({
   color: theme.palette.action.active,
   '&:hover': {
     backgroundColor: '#d6d6d6',
-    borderRadius: '3px'
+    borderRadius: '3px',
   },
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
 }))
 
 export default function SidebarWorkspace() {
+  const { id } = useParams()
+  const workspaces = useSelector((state) => state.trello.workspace)
+  const workspaceNow = workspaces.find((workspace) => workspace._id === id)
   const theme = useTheme()
   const [open, setOpen] = React.useState(true)
 
@@ -69,9 +75,31 @@ export default function SidebarWorkspace() {
   }
   return (
     <Box sx={{ display: 'flex', position: 'relative', height: '100%' }}>
-      <Box sx={{ display: open ? 'none' : 'block', backgroundColor: '#d6d6d6', width: '16px', height: '100%', position: 'relative' }}>
-        <IconButton aria-label="open drawer" onClick={handleDrawerOpen} edge="start" sx={{ mr: 2, ...(open && { display: 'none' }) }}>
-          <KeyboardArrowRightIcon color="action" sx={{ backgroundColor: '#d6d6d6', borderRadius: '50%', border: '1px solid #b1b4b9', marginLeft: '6px', marginTop: '6px' }} />
+      <Box
+        sx={{
+          display: open ? 'none' : 'block',
+          backgroundColor: '#d6d6d6',
+          width: '16px',
+          height: '100%',
+          position: 'relative',
+        }}
+      >
+        <IconButton
+          aria-label="open drawer"
+          onClick={handleDrawerOpen}
+          edge="start"
+          sx={{ mr: 2, ...(open && { display: 'none' }) }}
+        >
+          <KeyboardArrowRightIcon
+            color="action"
+            sx={{
+              backgroundColor: '#d6d6d6',
+              borderRadius: '50%',
+              border: '1px solid #b1b4b9',
+              marginLeft: '6px',
+              marginTop: '6px',
+            }}
+          />
         </IconButton>
       </Box>
       <Drawer
@@ -83,8 +111,8 @@ export default function SidebarWorkspace() {
             position: 'relative',
             width: drawerWidth,
             boxSizing: 'border-box',
-            height: '100%'
-          }
+            height: '100%',
+          },
         }}
         variant="persistent"
         anchor="left"
@@ -93,14 +121,28 @@ export default function SidebarWorkspace() {
         <DrawerHeader>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Avatar variant="rounded" sx={{ margin: '12px 8px' }}>
-              <SvgIcon component={TrelloIcon}></SvgIcon>
+              {workspaceNow.logo ? (
+                <img
+                  src={workspaceNow.logo}
+                  alt="Selected"
+                  style={{ width: '100%', height: '100%' }}
+                />
+              ) : (
+                <img
+                  src="https://res.cloudinary.com/dxdkr650j/image/upload/v1720858911/uploads/vp4xlkcxdb86qnyrodym.png"
+                  alt="Selected"
+                  style={{ width: '100%', height: '100%' }}
+                />
+              )}
             </Avatar>
             <Box>
               <Typography variant="subtitle2">Trello Workspace</Typography>
               <Typography variant="caption">Free</Typography>
             </Box>
           </Box>
-          <IconButton onClick={handleDrawerClose}>{theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}</IconButton>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
@@ -138,7 +180,11 @@ export default function SidebarWorkspace() {
         </List>
         <List
           subheader={
-            <ListSubheader component="div" id="nested-list-subheader" sx={{ color: 'rgba(0, 0, 0, 0.85)', fontWeight: '500' }}>
+            <ListSubheader
+              component="div"
+              id="nested-list-subheader"
+              sx={{ color: 'rgba(0, 0, 0, 0.85)', fontWeight: '500' }}
+            >
               Workspace views
             </ListSubheader>
           }
@@ -174,7 +220,11 @@ export default function SidebarWorkspace() {
         </List>
         <List
           subheader={
-            <ListSubheader component="div" id="nested-list-subheader" sx={{ color: 'rgba(0, 0, 0, 0.85)', fontWeight: '500' }}>
+            <ListSubheader
+              component="div"
+              id="nested-list-subheader"
+              sx={{ color: 'rgba(0, 0, 0, 0.85)', fontWeight: '500' }}
+            >
               Your Board
             </ListSubheader>
           }

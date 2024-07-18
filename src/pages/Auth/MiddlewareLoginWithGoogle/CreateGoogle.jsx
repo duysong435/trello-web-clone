@@ -49,7 +49,7 @@ function CreateUserGoogle() {
         bgcolor: '#fafbfc',
         height: '100vh',
         position: 'relative',
-        top: '0'
+        top: '0',
       }}
     >
       <Box sx={{ display: { xs: 'none', md: 'flex', gap: 1 } }}>
@@ -60,7 +60,7 @@ function CreateUserGoogle() {
             position: 'absolute',
             bottom: '0',
             right: '0',
-            width: '27%'
+            width: '27%',
           }}
         />
       </Box>
@@ -72,7 +72,7 @@ function CreateUserGoogle() {
             position: 'absolute',
             bottom: '0',
             left: '0',
-            width: '27%'
+            width: '27%',
           }}
         />
       </Box>
@@ -83,20 +83,20 @@ function CreateUserGoogle() {
           flexDirection: 'column',
           alignItems: 'center',
           width: '400px',
-          margin: 'auto'
+          margin: 'auto',
         }}
       >
         <Box
           component=""
           noValidate
-          sx={theme => ({
+          sx={(theme) => ({
             //  bgcolor: 'black',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             mt: 10,
             p: 6,
-            boxShadow: theme.shadowCustom.md
+            boxShadow: theme.shadowCustom.md,
           })}
         >
           <Box sx={{ display: 'flex' }}>
@@ -111,26 +111,18 @@ function CreateUserGoogle() {
               Trello
             </Typography>
           </Box>
-          <Typography sx={{ fontWeight: '500', p: 2 }}>
-            Creat your account
-          </Typography>
+          <Typography sx={{ fontWeight: '500', p: 2 }}>Creat your account</Typography>
           <Box sx={{ width: '100%' }}>
             {user ? (
               <Box>
                 <Box>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ color: '#6b778c', fontSize: '12px' }}
-                  >
+                  <Typography variant="subtitle1" sx={{ color: '#6b778c', fontSize: '12px' }}>
                     Email address
                   </Typography>
                   <Typography variant="subtitle2">{user.email}</Typography>
                 </Box>
                 <Box>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ color: '#6b778c', fontSize: '12px' }}
-                  >
+                  <Typography variant="subtitle1" sx={{ color: '#6b778c', fontSize: '12px' }}>
                     Name
                   </Typography>
                   <Typography variant="subtitle2">{user.name}</Typography>
@@ -164,11 +156,7 @@ function CreateUserGoogle() {
           </Button>
           <Grid container justifyContent="center" sx={{ marginBottom: '8px' }}>
             <Grid item>
-              <Link
-                href={path.SignIn}
-                variant="body2"
-                sx={{ textDecoration: 'none' }}
-              >
+              <Link href={path.SignIn} variant="body2" sx={{ textDecoration: 'none' }}>
                 Already have an account? Sign in
               </Link>
             </Grid>
@@ -180,13 +168,10 @@ function CreateUserGoogle() {
               alignItems: 'center',
               flexDirection: 'column',
               borderTop: '1px solid #c1c7d0',
-              width: '100%'
+              width: '100%',
             }}
           >
-            <img
-              src={LogoAlassion}
-              style={{ marginTop: '30px', width: '160px' }}
-            />
+            <img src={LogoAlassion} style={{ marginTop: '30px', width: '160px' }} />
             <Typography
               variant="body2"
               sx={{ textAlign: 'center', fontSize: '11px', paddingTop: '8px' }}
@@ -198,10 +183,7 @@ function CreateUserGoogle() {
               .
             </Typography>
             <Box sx={{ marginTop: '12px', display: 'flex' }}>
-              <Typography
-                variant="body2"
-                sx={{ textAlign: 'center', fontSize: '11px' }}
-              >
+              <Typography variant="body2" sx={{ textAlign: 'center', fontSize: '11px' }}>
                 Privacy Policy
               </Typography>
               <Typography
@@ -210,10 +192,7 @@ function CreateUserGoogle() {
               >
                 •
               </Typography>
-              <Typography
-                variant="body2"
-                sx={{ textAlign: 'center', fontSize: '11px' }}
-              >
+              <Typography variant="body2" sx={{ textAlign: 'center', fontSize: '11px' }}>
                 User Notice
               </Typography>
             </Box>

@@ -23,11 +23,11 @@ function App() {
         </Route>
 
         <Route element={<PrivateRoutes />}>
-          <Route path={path.Workspace} element={<Workspace />} />
+          <Route path={path.Workspace + '/:id'} element={<Workspace />} />
           <Route path={path.Board + '/:id'} element={<Board />} />
           <Route path={path.Home} element={<HomePage />} />
         </Route>
-        <Route path="*" element={<Navigate to="/404" />} />
+        {/* <Route path="*" element={<Navigate to="/404" />} /> */}
         <Route path="/404" element={<ErrorPage />} />
       </Routes>
     </>
