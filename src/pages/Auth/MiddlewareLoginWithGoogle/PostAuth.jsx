@@ -12,10 +12,10 @@ const PostAuth = () => {
     const checkUserStatus = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:8080/v1/auth/checkNewUser',
+          `${import.meta.env.VITE_REACT_APP_API_URL}/auth/checkNewUser`,
           {
-            withCredentials: true
-          }
+            withCredentials: true,
+          },
         )
         // console.log(response);
 

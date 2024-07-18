@@ -7,5 +7,6 @@ export const path = {
   SignIn: 'login',
   Board: 'board',
   CreateUserGoogle: 'auth',
-  PostAuth: 'postAuth'
+  PostAuth: 'postAuth',
+  Workspace: 'workspace',
 }

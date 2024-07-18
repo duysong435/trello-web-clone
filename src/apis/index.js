@@ -47,7 +47,19 @@ export const createNewCardAPI = async (newCardData) => {
 
 export const testLoginGG = async () => {
   const response = await axios.get(`${API_ROOT}/v1/auth/login/success`, {
-    withCredentials: true
+    withCredentials: true,
   })
+  return response
+}
+
+export const getAllBoardForWorkspace = async (id) => {
+  const response = await axios.get(`${API_ROOT}/v1/boards/getforworkspace/${id}`)
+  console.log(response)
+  return response
+}
+
+export const updateLogoForWorkspace = async (workspaceId, newLogo) => {
+  const response = await axios.post(`${API_ROOT}/v1/workspace/update-logo`, workspaceId, newLogo)
+  console.log(response)
   return response
 }

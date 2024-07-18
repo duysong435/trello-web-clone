@@ -7,7 +7,7 @@ import {
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER
+  REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import trelloSlice from './trelloSlice'
@@ -17,23 +17,23 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  blacklist: ['trello']
+  blacklist: ['trello'],
 }
 
 const authPersistConfig = {
   key: 'auth',
-  storage: storage
+  storage: storage,
   // blacklist: ['trello'], // Không lưu trạng thái của trelloSlice
 }
 const trelloPersistConfig = {
   key: 'trello',
-  storage: storage
+  storage: storage,
   // blacklist: ['boards'] // Không lưu trạng thái của trelloSlice
 }
 
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authSlice.reducer),
-  trello: persistReducer(trelloPersistConfig, trelloSlice.reducer)
+  trello: persistReducer(trelloPersistConfig, trelloSlice.reducer),
 })
 // const rootReducer = combineReducers({
 //   auth: authSlice.reducer,
@@ -45,12 +45,12 @@ const persistedReducer = rootReducer
 
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-      }
-    })
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 })
 
 const persistor = persistStore(store)

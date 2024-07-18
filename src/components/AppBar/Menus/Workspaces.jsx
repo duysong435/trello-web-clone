@@ -12,7 +12,11 @@ import ContentCopy from '@mui/icons-material/ContentCopy'
 import ContentPaste from '@mui/icons-material/ContentPaste'
 import Cloud from '@mui/icons-material/Cloud'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-
+import { useSelector } from 'react-redux'
+import { SvgIcon } from '@mui/material'
+import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
+import { path } from '~/utils/constants'
+import { Link } from 'react-router-dom'
 function Workspaces() {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
@@ -22,6 +26,8 @@ function Workspaces() {
   const handleClose = () => {
     setAnchorEl(null)
   }
+  const Workspace = useSelector((state) => state.trello.workspace)
+  // console.log(Workspace)
   return (
     <Box>
       <Button
@@ -41,43 +47,45 @@ function Workspaces() {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button-workspaces'
+          'aria-labelledby': 'basic-button-workspaces',
         }}
       >
-        <MenuItem>
-          <ListItemIcon>
-            <ContentCut fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Cut</ListItemText>
-          <Typography variant="body2" color="text.secondary">
-            ⌘X
-          </Typography>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <ContentCopy fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Copy</ListItemText>
-          <Typography variant="body2" color="text.secondary">
-            ⌘C
-          </Typography>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <ContentPaste fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Paste</ListItemText>
-          <Typography variant="body2" color="text.secondary">
-            ⌘V
-          </Typography>
-        </MenuItem>
-        <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <Cloud fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Web Clipboard</ListItemText>
-        </MenuItem>
+        {/* <Typography paddingX={2}>workspace now</Typography>
+
+        <Divider /> */}
+        {/* <Typography paddingX={2}>all workspace</Typography> */}
+        {Workspace.map((workspace) => (
+          <MenuItem key={workspace._id}>
+            <Link
+              to={'/' + path.Workspace + '/' + workspace._id}
+              // style="background-color: rgb(131, 140, 145)"
+              style={{
+                textDecoration: 'none',
+                color: 'black',
+                // position: 'relative',
+                width: '100%',
+                display: 'flex',
+              }}
+            >
+              <ListItemIcon>
+                {workspace.logo ? (
+                  <img
+                    src={workspace.logo}
+                    alt="Selected"
+                    style={{ width: '24px', height: '100%' }}
+                  />
+                ) : (
+                  <img
+                    src="https://res.cloudinary.com/dxdkr650j/image/upload/v1720858911/uploads/vp4xlkcxdb86qnyrodym.png"
+                    alt="Selected"
+                    style={{ width: '24px', height: '100%' }}
+                  />
+                )}
+              </ListItemIcon>
+              <ListItemText>{workspace.title}</ListItemText> {/* Dùng title của workspace */}
+            </Link>
+          </MenuItem>
+        ))}
       </Menu>
     </Box>
   )

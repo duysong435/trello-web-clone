@@ -20,17 +20,11 @@ import Typography from '@mui/material/Typography'
 import BoardNew from './BoardNew/BoardNew'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllForUser } from '~/redux/trelloSlice'
-export default function DashboardAll() {
-  const dispatch = useDispatch()
-  const boards = useSelector(state => state.trello.boards)
-
-  useEffect(() => {
-    dispatch(getAllForUser())
-  }, [])
+export default function DashboardAll({ boards, title, id }) {
   return (
     <Box>
       <Typography
-        variant='inherit'
+        variant="inherit"
         component={'h2'}
         sx={{
           fontWeight: 600,
@@ -39,23 +33,23 @@ export default function DashboardAll() {
           // display: '-webkit-flex',
           // '-webkit-box-orient': 'vertical',
           // '-webkit-line-clamp': 1
-          marginBottom: '10px'
+          marginBottom: '10px',
+          marginTop: '10px',
         }}
-      >YOUR WORKSPACE</Typography>
-      <Box sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: 2
-      }}>
-
-        {
-          boards?.map((item, index) => {
-            return (
-              <CardItem key={index} item={item} />
-            )
-          })
-        }
-        <BoardNew />
+      >
+        {title || 'Boards'}
+      </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 2,
+        }}
+      >
+        {boards.map((item, index) => {
+          return <CardItem key={index} item={item} />
+        })}
+        <BoardNew id={id} />
       </Box>
     </Box>
   )
