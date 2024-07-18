@@ -1,17 +1,19 @@
-/* eslint-disable prettier/prettier */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from '~/axios'
 import { toast } from 'react-toastify'
 
 const trelloSlice = createSlice({
   name: 'trello',
-  initialState: { status: 'idle', boards: [], workspace: [] },
+  initialState: { status: 'idle', boards: [], disableDrag: false },
   reducers: {
-    addColumn: (state, action) => {
-      state.push(action.payload)
+    disableDragApp: (state, action) => {
+      state.disableDrag = true
     },
+    enableDragApp: (state, action) => {
+      state.disableDrag = false
+    }
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(getAllForUser.pending, (state, action) => {
         state.status = 'loading'
@@ -20,13 +22,11 @@ const trelloSlice = createSlice({
         state.status = 'idle'
         state.boards = action.payload.metadata
       })
-      .addCase(getAllWorkspaceForUser.pending, (state, action) => {
-        state.status = 'loading'
-      })
-      .addCase(getAllWorkspaceForUser.fulfilled, (state, action) => {
+      .addCase(getAllForUser.rejected, (state, action) => {
         state.status = 'idle'
-        state.workspace = action.payload
+        toast.error('Failed!')
       })
+
       .addCase(addNewBoard.pending, (state, action) => {
         state.status = 'loading'
       })
@@ -39,24 +39,42 @@ const trelloSlice = createSlice({
         state.status = 'idle'
         toast.error('create failed!')
       })
-  },
+
+      .addCase(updateCard.pending, (state, action) => {
+        state.status = 'loading'
+      })
+      .addCase(updateCard.fulfilled, (state, action) => {
+        state.status = 'idle'
+        // state.boards.push(action.payload)
+        toast.success('create success!')
+      })
+      .addCase(updateCard.rejected, (state, action) => {
+        state.status = 'idle'
+        toast.error('create failed!')
+      })
+  }
 })
 
 export const getAllForUser = createAsyncThunk('trello/getAll', async () => {
   const res = await axios.get('/boards/get-all-board')
-  console.log('🚀 ~ getAllForUser ~ res:', res)
-  return res
-})
-export const getAllWorkspaceForUser = createAsyncThunk('trello/getAllWorkspace', async () => {
-  const res = await axios.get('workspace/get-all-workspace')
-  console.log('🚀 ~ getAllForUser ~ res:', res)
-  return res
-})
-export const addNewBoard = createAsyncThunk('trello/addNewBoard', async (newBoard) => {
-  // console.log(newBoard)
-  const res = await axios.post('/boards', newBoard)
-  console.log('🚀 ~ res:', res)
+  // console.log('🚀 ~ getAllForUser ~ res:', res)
   return res
 })
 
+export const addNewBoard = createAsyncThunk(
+  'trello/addNewBoard',
+  async newBoard => {
+    const res = await axios.post('/boards', newBoard)
+    // console.log('🚀 ~ res:', res)
+    return res
+  }
+)
+
+export const updateCard = createAsyncThunk('trello/updateCard', async (data) => {
+  const res = await axios.put('/cards', data)
+  // console.log('🚀 ~ res:', res)
+  return res
+})
+
+export const { disableDragApp, enableDragApp } = trelloSlice.actions
 export default trelloSlice

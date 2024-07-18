@@ -112,6 +112,7 @@ export default function SignIn() {
           <Typography sx={{ fontWeight: '500', p: 2 }}>Sign In to Continue</Typography>
           <TextField
             margin="normal"
+            value={'test@gmail.com'}
             required
             fullWidth
             id="email"
@@ -137,6 +138,7 @@ export default function SignIn() {
           )}
           <TextField
             margin="normal"
+            value={'123456'}
             required
             fullWidth
             name="password"

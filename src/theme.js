@@ -52,6 +52,9 @@ const theme = extendTheme({
           },
           '*::-webkit-scrollbar-thumb:hover': {
             backgroundColor: 'white'
+          },
+          '._dialogOverlay_13kqw_820': {
+            backgroundColor: '#333333 !important'
           }
         }
       }
