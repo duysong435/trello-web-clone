@@ -61,7 +61,7 @@ const CustomAddIcon = styled(AddIcon)(({ theme }) => ({
 
 export default function SidebarWorkspace() {
   const { id } = useParams()
-  const workspaces = useSelector((state) => state.trello.workspace)
+  const workspaces = useSelector((state) => state.trello.workspaces)
   const workspaceNow = workspaces.find((workspace) => workspace._id === id)
   const theme = useTheme()
   const [open, setOpen] = React.useState(true)

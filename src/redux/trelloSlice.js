@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 
 const trelloSlice = createSlice({
   name: 'trello',
-  initialState: { status: 'idle', boards: [], workspace: [] },
+  initialState: { status: 'idle', workspaces: [] },
   reducers: {
     addColumn: (state, action) => {
       state.push(action.payload)
@@ -18,21 +18,21 @@ const trelloSlice = createSlice({
       })
       .addCase(getAllForUser.fulfilled, (state, action) => {
         state.status = 'idle'
-        state.boards = action.payload.metadata
-      })
-      .addCase(getAllWorkspaceForUser.pending, (state, action) => {
-        state.status = 'loading'
-      })
-      .addCase(getAllWorkspaceForUser.fulfilled, (state, action) => {
-        state.status = 'idle'
-        state.workspace = action.payload
+        state.workspaces = action.payload.metadata
       })
       .addCase(addNewBoard.pending, (state, action) => {
         state.status = 'loading'
       })
       .addCase(addNewBoard.fulfilled, (state, action) => {
         state.status = 'idle'
-        state.boards.push(action.payload)
+        const { workspaceId } = action.payload
+
+        // Tìm workspace theo workspaceId
+        const workspace = state.workspaces.find((ws) => ws._id === workspaceId)
+
+        if (workspace) {
+          workspace.boards.push(action.payload)
+        }
         toast.success('create success!')
       })
       .addCase(addNewBoard.rejected, (state, action) => {

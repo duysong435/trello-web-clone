@@ -21,6 +21,7 @@ import BoardNew from './BoardNew/BoardNew'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllForUser } from '~/redux/trelloSlice'
 export default function DashboardAll({ boards, title, id }) {
+  console.log(boards)
   return (
     <Box>
       <Typography

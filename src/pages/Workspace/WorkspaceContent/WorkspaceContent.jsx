@@ -12,10 +12,11 @@ const WorkspaceContent = () => {
   const dispatch = useDispatch()
   const { id } = useParams()
   // const [boards, setBoards] = useState()
-  const boards = useSelector((state) => state.trello.boards)
-  const boardsForWp = boards.filter((items) => {
-    return items.workspaceId === id
+  const workspaces = useSelector((state) => state.trello.workspaces)
+  const workspaceNow = workspaces.find((items) => {
+    return items._id === id
   })
+  const boardsForWp = workspaceNow.boards
   // const workspace = Object.groupBy(boards, (workspace) => workspace.workspaceId)
   // useEffect(() => {
   //   const fetchData = async () => {

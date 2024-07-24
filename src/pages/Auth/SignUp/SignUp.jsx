@@ -110,9 +110,7 @@ export default function SignUp() {
               Trello
             </Typography>
           </Box>
-          <Typography sx={{ fontWeight: '500', p: 2 }}>
-            Sign up to Continue
-          </Typography>
+          <Typography sx={{ fontWeight: '500', p: 2 }}>Sign up to Continue</Typography>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -130,14 +128,10 @@ export default function SignUp() {
                 })}
               />
               {errors?.firstName?.type === 'required' && (
-                <Typography sx={{ color: 'red' }}>
-                  This field is required
-                </Typography>
+                <Typography sx={{ color: 'red' }}>This field is required</Typography>
               )}
               {errors?.firstName?.type === 'maxLength' && (
-                <Typography sx={{ color: 'red' }}>
-                  Email cannot exceed 100 characters
-                </Typography>
+                <Typography sx={{ color: 'red' }}>Email cannot exceed 100 characters</Typography>
               )}
             </Grid>
 
@@ -156,14 +150,10 @@ export default function SignUp() {
                 })}
               />
               {errors?.lastName?.type === 'required' && (
-                <Typography sx={{ color: 'red' }}>
-                  This field is required
-                </Typography>
+                <Typography sx={{ color: 'red' }}>This field is required</Typography>
               )}
               {errors?.lastName?.type === 'maxLength' && (
-                <Typography sx={{ color: 'red' }}>
-                  Email cannot exceed 100 characters
-                </Typography>
+                <Typography sx={{ color: 'red' }}>Email cannot exceed 100 characters</Typography>
               )}
             </Grid>
 
@@ -184,14 +174,10 @@ export default function SignUp() {
                 })}
               />
               {errors?.email?.type === 'required' && (
-                <Typography sx={{ color: 'red' }}>
-                  This field is required
-                </Typography>
+                <Typography sx={{ color: 'red' }}>This field is required</Typography>
               )}
               {errors?.email?.type === 'maxLength' && (
-                <Typography sx={{ color: 'red' }}>
-                  Email cannot exceed 100 characters
-                </Typography>
+                <Typography sx={{ color: 'red' }}>Email cannot exceed 100 characters</Typography>
               )}
               {errors?.email?.type === 'pattern' && (
                 <Typography sx={{ color: 'red' }}>example@gmail.com</Typography>
@@ -216,14 +202,10 @@ export default function SignUp() {
                 })}
               />
               {errors?.password?.type === 'required' && (
-                <Typography sx={{ color: 'red' }}>
-                  This field is required
-                </Typography>
+                <Typography sx={{ color: 'red' }}>This field is required</Typography>
               )}
               {errors?.password?.type === 'maxLength' && (
-                <Typography sx={{ color: 'red' }}>
-                  Password cannot exceed 25 characters
-                </Typography>
+                <Typography sx={{ color: 'red' }}>Password cannot exceed 25 characters</Typography>
               )}
               {errors?.password?.type === 'minLength' && (
                 <Typography sx={{ color: 'red' }}>
@@ -236,8 +218,8 @@ export default function SignUp() {
                 variant="body2"
                 sx={{ textAlign: 'center', fontSize: '11px', marginTop: '8px' }}
               >
-                By signing up, I accept the Atlassian Cloud Terms of Service and
-                acknowledge the Privacy Policy.
+                By signing up, I accept the Atlassian Cloud Terms of Service and acknowledge the
+                Privacy Policy.
               </Typography>
             </Grid>
           </Grid>
@@ -252,21 +234,12 @@ export default function SignUp() {
           </Button>
           <Typography sx={{ color: 'grey' }}>Or continue with:</Typography>
           <GoogleButton fullWidth color="text" sx={{ mt: 2, mb: 2 }}>
-            <SvgIcon
-              component={Google}
-              fontSize="medium"
-              inheritViewBox
-              sx={{ padding: '2px' }}
-            />
+            <SvgIcon component={Google} fontSize="medium" inheritViewBox sx={{ padding: '2px' }} />
             <Typography>Google</Typography>
           </GoogleButton>
           <Grid container justifyContent="center" sx={{ marginBottom: '8px' }}>
             <Grid item>
-              <Link
-                href={path.SignIn}
-                variant="body2"
-                sx={{ textDecoration: 'none' }}
-              >
+              <Link href={path.SignIn} variant="body2" sx={{ textDecoration: 'none' }}>
                 Already have an account? Sign in
               </Link>
             </Grid>
@@ -280,10 +253,7 @@ export default function SignUp() {
               width: '100%',
             }}
           >
-            <img
-              src={LogoAlassion}
-              style={{ marginTop: '30px', width: '160px' }}
-            />
+            <img src={LogoAlassion} style={{ marginTop: '30px', width: '160px' }} />
             <Typography
               variant="body2"
               sx={{ textAlign: 'center', fontSize: '11px', paddingTop: '8px' }}
@@ -295,10 +265,7 @@ export default function SignUp() {
               .
             </Typography>
             <Box sx={{ marginTop: '12px', display: 'flex' }}>
-              <Typography
-                variant="body2"
-                sx={{ textAlign: 'center', fontSize: '11px' }}
-              >
+              <Typography variant="body2" sx={{ textAlign: 'center', fontSize: '11px' }}>
                 Privacy Policy
               </Typography>
               <Typography
@@ -307,10 +274,7 @@ export default function SignUp() {
               >
                 •
               </Typography>
-              <Typography
-                variant="body2"
-                sx={{ textAlign: 'center', fontSize: '11px' }}
-              >
+              <Typography variant="body2" sx={{ textAlign: 'center', fontSize: '11px' }}>
                 User Notice
               </Typography>
             </Box>

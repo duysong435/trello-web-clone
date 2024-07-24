@@ -7,14 +7,12 @@ import { useEffect } from 'react'
 import axios from '~/axios'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { getAllWorkspaceForUser } from '~/redux/trelloSlice'
+import { getAllForUser } from '~/redux/trelloSlice'
 import { useParams } from 'react-router-dom'
 export default function Workspace() {
   const dispatch = useDispatch()
   const { id } = useParams()
-  useEffect(() => {
-    dispatch(getAllWorkspaceForUser())
-  }, [dispatch])
+
   // const workspaces = useSelector((state) => state.trello.workspace)
   // const workspaceNow = workspaces.find((workspace) => workspace._id === id)
   // console.log(workspaceNow)

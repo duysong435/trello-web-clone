@@ -7,21 +7,11 @@ import { useEffect } from 'react'
 import { getAllForUser } from '~/redux/trelloSlice'
 export default function DashboardHome() {
   const dispatch = useDispatch()
-
-  const boards = useSelector((state) => state.trello.boards)
-  const workspaces = useSelector((state) => state.trello.workspace)
-  const joinedWorkspaces = workspaces.map((workspace) => {
-    return {
-      ...workspace,
-      boards: boards.filter((board) => board.workspaceId === workspace.id),
-    }
-  })
-
-  console.log(joinedWorkspaces)
+  useEffect
   useEffect(() => {
-    // console.log(workspaces)
     dispatch(getAllForUser())
   }, [])
+  const workspaces = useSelector((state) => state.trello.workspaces)
   return (
     <Box
       sx={{
@@ -35,7 +25,7 @@ export default function DashboardHome() {
         <DashboardSideBar />
       </Box>
       <Box>
-        {joinedWorkspaces.map((items) => (
+        {workspaces.map((items) => (
           <DashboardAll boards={items.boards} title={items.title} key={items._id} id={items._id} />
         ))}
       </Box>

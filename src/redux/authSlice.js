@@ -28,8 +28,8 @@ const authSlice = createSlice({
           userId: action.payload.user._id,
           accessToken: action.payload.tokens.accessToken,
           refreshToken: action.payload.tokens.refreshToken,
-          status: 'idle', // Thêm các trường khác nếu có
-          data: action.payload.user, // Thêm các trường khác nếu có
+          status: 'idle',
+          data: action.payload.user,
         })
         window.localStorage.setItem('persist:auth', `${authState}`)
         toast.success('Login success!')

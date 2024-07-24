@@ -14,7 +14,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 const DetailWorkspace = () => {
   const { id } = useParams()
-  const workspaces = useSelector((state) => state.trello.workspace)
+  const workspaces = useSelector((state) => state.trello.workspaces)
   const workspaceNow = workspaces.find((workspace) => workspace._id === id)
   const [selectedImage, setSelectedImage] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
@@ -31,7 +31,6 @@ const DetailWorkspace = () => {
       const formData = new FormData()
       formData.append('file', file)
       formData.append('workspaceId', id)
-      // Send the file to the backend using axios
       try {
         const response = await axios.post(
           `${import.meta.env.VITE_REACT_APP_API_URL}/upload/`,

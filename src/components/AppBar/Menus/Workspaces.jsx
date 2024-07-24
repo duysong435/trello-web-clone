@@ -26,7 +26,7 @@ function Workspaces() {
   const handleClose = () => {
     setAnchorEl(null)
   }
-  const Workspace = useSelector((state) => state.trello.workspace)
+  const workspaces = useSelector((state) => state.trello.workspaces)
   // console.log(Workspace)
   return (
     <Box>
@@ -54,7 +54,7 @@ function Workspaces() {
 
         <Divider /> */}
         {/* <Typography paddingX={2}>all workspace</Typography> */}
-        {Workspace.map((workspace) => (
+        {workspaces.map((workspace) => (
           <MenuItem key={workspace._id}>
             <Link
               to={'/' + path.Workspace + '/' + workspace._id}
